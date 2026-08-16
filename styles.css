@@ -57,9 +57,9 @@ div{
     scale: 1.1;
 }
 
-/*-------------------/*crear cuenta-----------------------/*/
+/*-------------------REGISTER-----------------------/*/
 
-.box-crear{
+.register-container{
    background-color: #b82536;
     display: grid;
     width: 50%;
@@ -70,7 +70,7 @@ div{
     border: 2px solid #161917;
     text-align: center  ; 
 }
-.correo2,.contraseña2{
+.register-email,.register-pasword{
     width: 80%;
     margin: auto;
     margin-top: 20px;
@@ -81,7 +81,18 @@ div{
     background-color:#161917 ;
     grid-column: 1 / -1;
 }
-.nombre,.apellido{
+.register-pasword-confirm{
+    width: 80%;
+    margin: auto;
+    margin-top: 20px;
+    height: 33px;
+    border-radius: 12px;
+    outline: none;
+    border: 2px solid #380c07;
+    background-color:#161917 ;
+    grid-column: 1 / -1;
+}
+.register-name,.register-surname{
     width: 80%;
     margin: auto;
     margin-top: 20px;
@@ -93,26 +104,26 @@ div{
     grid-column: 1 / -1;
     
 }
-.nombre:hover{
+.register-name:hover{
     outline: 2px solid #e1e3db
 }
-#edad:hover{
+#birthdate:hover{
     outline: 2px solid #e1e3db
 }
-#genero:hover{
+#register-gender:hover{
     outline: 2px solid #e1e3db
 }
-.contraseña2:hover{
+.register-pasword:hover{
    outline: 2px solid #e1e3db 
 }
-.correo2:hover{
+.register-email:hover{
    outline: 2px solid #e1e3db 
 }
 
 .apellido:hover{
     outline: 2px solid #e1e3db ;
 }
-#genero,#edad{
+#register-gender,#register-birthdate{
     height: 30px;
     border-radius: 8px;
     border: 1px solid #380c07;
@@ -121,27 +132,27 @@ div{
     margin: auto;
     
 }
-#genero{
+#register-gender{
     width: 100px;
     margin-top: 20px;
     height: 37px;
 }
 
-#edad{
+#register-birthdate{
     width: 100px;
     height: 35px;
     margin-top: 20px;
 }
-.contraseña2{
+.register-pasword{
     margin-bottom: 10px;
     
 }
 
-.contraseña2 otra{
+.register-pasword otra{
     margin-bottom: 10px;
     
 }
-.boton2{
+.register-button{
     width: 130px;
     padding: 10px;
     margin: auto;
@@ -155,11 +166,11 @@ div{
     grid-column: 1 / -1;
     margin-bottom: 0;
 }
-.boton2:hover{
+.register-button:hover{
         outline: 2px solid #e1e3db ;
     }
 
-.no-cuenta2{
+.register-no-acaunt{
     margin-top: 5px;
     color: #e1e3db;
     grid-column: 1 / -1;
@@ -167,6 +178,6 @@ div{
     margin-bottom: 13px;
 }
 
-.no-cuenta2:hover{
+.register-no-acaunt:hover{
     scale: 1.05;
 }
