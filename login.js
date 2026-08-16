@@ -6,7 +6,9 @@ const login_button= document.querySelector(".login-button")
 
 
 
-login_email.addEventListener("click" ,() => {
+login_button.addEventListener("click" ,() => {
     e.preventDefault();
-    login_email.hover = none
+    if (nombre.value === "") {
+    // hay un error
+    }
 })

@@ -83,7 +83,7 @@ body{
     border: 2px solid #161917;
     text-align: center  ; 
 }
-.register-email,.register-pasword{
+.register-email,.register-password{
     width: 80%;
     margin: auto;
     margin-top: 20px;
@@ -95,7 +95,7 @@ body{
     grid-column: 1 / -1;
     color: #e1e3db;
 }
-.register-pasword-confirm{
+.register-password-confirm{
     width: 80%;
     margin: auto;
     margin-top: 20px;
@@ -129,7 +129,7 @@ body{
 #register-gender:hover{
     outline: 2px solid #e1e3db
 }
-.register-pasword:hover{
+.register-password:hover{
    outline: 2px solid #e1e3db 
 }
 .register-email:hover{
@@ -149,22 +149,23 @@ body{
     
 }
 #register-gender{
-    width: 100px;
+    width: 80%;
     margin-top: 20px;
     height: 37px;
 }
 
 #register-birthdate{
-    width: 100px;
+    width: 80%;
     height: 35px;
+    margin: auto;
     margin-top: 20px;
 }
-.register-pasword{
+.register-password{
     margin-bottom: 10px;
     
 }
 
-.register-pasword otra{
+.register-password otra{
     margin-bottom: 10px;
     
 }
@@ -196,4 +197,8 @@ body{
 
 .register-no-acaunt:hover{
     scale: 1.05;
+}
+
+.register-error{
+    color: #e1e3db;
 }
