@@ -1,0 +1,174 @@
+body{
+    margin:0;
+    background-color: #e1e3db;
+}
+
+
+div{
+    background-color: #b82536;
+    display: flex;
+    width: 50%;
+    margin: auto;
+    flex-direction: column;
+    margin-top: 50px;
+    border-radius: 16px;
+    border: 2px solid #161917;
+    text-align: center  ;
+}
+.titulo{
+    color:#e1e3db ;
+}
+
+.correo,.contraseña{
+    width: 80%;
+    margin: auto;
+    margin-top: 20px;
+    height: 33px;
+    border-radius: 12px;
+    outline: none;
+    border: 2px solid #380c07;
+    background-color:#161917 ;
+    
+}
+.correo{
+    margin-top: 0;
+}
+.correo::placeholder{
+    color:#e1e3db ;
+}
+.no-cuenta{
+    margin-top: 5px;
+    color: #e1e3db;
+}
+.boton{
+    width: 130px;
+    padding: 10px;
+    margin: auto;
+    margin-bottom: 10px;
+    border-radius: 12px;
+    border: none;
+    border: 2px solid #70160e ;
+    background-color:#161917;
+    color:#e1e3db ;
+    margin-top: 15px;
+}
+
+.boton:hover{
+    scale: 1.1;
+}
+
+/*-------------------/*crear cuenta-----------------------/*/
+
+.box-crear{
+   background-color: #b82536;
+    display: grid;
+    width: 50%;
+    margin: auto;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 50px;
+    border-radius: 16px;
+    border: 2px solid #161917;
+    text-align: center  ; 
+}
+.correo2,.contraseña2{
+    width: 80%;
+    margin: auto;
+    margin-top: 20px;
+    height: 33px;
+    border-radius: 12px;
+    outline: none;
+    border: 2px solid #380c07;
+    background-color:#161917 ;
+    grid-column: 1 / -1;
+}
+.nombre,.apellido{
+    width: 80%;
+    margin: auto;
+    margin-top: 20px;
+    height: 33px;
+    border-radius: 12px;
+    outline: none;
+    border: 2px solid #380c07;
+    background-color:#161917 ;
+    grid-column: 1 / -1;
+    
+}
+.nombre:hover{
+    outline: 2px solid #e1e3db
+}
+#edad:hover{
+    outline: 2px solid #e1e3db
+}
+#genero:hover{
+    outline: 2px solid #e1e3db
+}
+.contraseña2:hover{
+   outline: 2px solid #e1e3db 
+}
+.correo2:hover{
+   outline: 2px solid #e1e3db 
+}
+
+.apellido:hover{
+    outline: 2px solid #e1e3db ;
+}
+#genero,#edad{
+    height: 30px;
+    border-radius: 8px;
+    border: 1px solid #380c07;
+    background-color:#161917 ;
+    color: #e1e3db;
+    margin: auto;
+    
+}
+#genero{
+    width: 100px;
+    margin-top: 20px;
+    height: 37px;
+}
+#edad::selection{
+    background-color: red;
+}
+#edad{
+    width: 100px;
+    height: 35px;
+    margin-top: 20px;
+}
+.contraseña2{
+    margin-bottom: 10px;
+    
+}
+
+.contraseña2 otra{
+    margin-bottom: 10px;
+    
+}
+.boton2{
+    width: 130px;
+    padding: 10px;
+    margin: auto;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: none;
+    border: 2px solid #70160e ;
+    background-color:#161917;
+    color:#e1e3db ;
+    margin-top: 15px;
+    grid-column: 1 / -1;
+    margin-bottom: 0;
+}
+.boton2:hover{
+         outline: 2px solid #e1e3db ;
+    }
+
+.no-cuenta2{
+    margin-top: 5px;
+    color: #e1e3db;
+    grid-column: 1 / -1;
+    text-decoration: none;
+    margin-bottom: 13px;
+}
+
+.no-cuenta2:hover{
+    scale: 1.05;
+}
