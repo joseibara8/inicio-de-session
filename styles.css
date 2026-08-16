@@ -4,7 +4,7 @@ body{
 }
 
 
-div{
+.login-container{
     background-color: #b82536;
     display: flex;
     width: 50%;
@@ -15,11 +15,11 @@ div{
     border: 2px solid #161917;
     text-align: center  ;
 }
-.titulo{
+.login-tittle{
     color:#e1e3db ;
 }
 
-.correo,.contraseña{
+.login-email,.login-password{
     width: 80%;
     margin: auto;
     margin-top: 20px;
@@ -30,17 +30,22 @@ div{
     background-color:#161917 ;
     
 }
-.correo{
+.login-email{
     margin-top: 0;
 }
-.correo::placeholder{
+.login-email::placeholder{
     color:#e1e3db ;
 }
-.no-cuenta{
+.loging-no-account{
     margin-top: 5px;
     color: #e1e3db;
+    text-decoration: none;
 }
-.boton{
+
+.loging-no-account:hover{
+    scale: 1.05;
+}
+.login-button{
     width: 130px;
     padding: 10px;
     margin: auto;
@@ -53,8 +58,15 @@ div{
     margin-top: 15px;
 }
 
-.boton:hover{
+.login-button:hover{
     scale: 1.1;
+}
+
+.login-email:hover{
+    outline: 2px solid #e1e3db
+}
+.login-password:hover{
+    outline: 2px solid #e1e3db
 }
 
 /*-------------------REGISTER-----------------------/*/
@@ -107,7 +119,7 @@ div{
 .register-name:hover{
     outline: 2px solid #e1e3db
 }
-#birthdate:hover{
+#register-birthdate:hover{
     outline: 2px solid #e1e3db
 }
 #register-gender:hover{
@@ -120,7 +132,7 @@ div{
    outline: 2px solid #e1e3db 
 }
 
-.apellido:hover{
+.register-surname:hover{
     outline: 2px solid #e1e3db ;
 }
 #register-gender,#register-birthdate{
