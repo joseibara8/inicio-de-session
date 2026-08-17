@@ -38,7 +38,26 @@ register_button.addEventListener("click" ,(e) => {
         return;
     }
 
-    register_error.textContent = "todo correcto"
-    
-    
+    fetch("/register", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            name: register_name.value,
+            surname: register_surname.value,
+            birthdate: register_birthdate.value,
+            gender: register_gender.value,
+            email: register_email.value,
+            password: register_password.value
+        })
+    })
+    .then(response => response.text())
+    .then(data => {
+        register_error.textContent = data;
+    })
+    .catch(error => {
+        console.error(error);
+        register_error.textContent = "Error al conectar con el servidor";
+    });
 })
