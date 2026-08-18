@@ -1,6 +1,30 @@
 const express = require("express");
 const path = require("path");
+const mysql = require("mysql2");
 
+const db = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "holapas",
+    database: "registro_app"
+});
+
+db.connect((err) => {
+    if (err) {
+        console.error("Error al conectar con MySQL:", err);
+        return;
+    }
+
+    console.log("Conectado a MySQL");
+});
+db.query("SELECT * FROM users", (err, results) => {
+    if (err) {
+        console.error(err);
+        return;
+    }
+
+    console.log(results);
+});
 const app = express();
 
 app.use(express.json());
@@ -24,9 +48,31 @@ app.get("/register", (req, res) => {
 });
 
 app.post("/register", (req, res) => {
-    console.log(req.body);
 
-    res.send("Usuario recibido");
+    const sql = `
+        INSERT INTO users
+        (name, surname, birthdate, gender, email, password)
+        VALUES (?, ?, ?, ?, ?, ?)
+    `;
+
+    const values = [
+        req.body.name,
+        req.body.surname,
+        req.body.birthdate,
+        req.body.gender,
+        req.body.email,
+        req.body.password
+    ];
+
+    db.query(sql, values, (err, results) => {
+
+        if (err) {
+            console.error(err);
+            return res.status(500).send("Error al crear usuario");
+        }
+
+        res.send("Usuario creado correctamente");
+    });
 });
 
 app.listen(3000, () => {
