@@ -1,6 +1,6 @@
 body{
     margin:0;
-    background-color: #e1e3db;
+    background-color: #ffe6ff;
 }
 
 
@@ -73,7 +73,7 @@ body{
 /*-------------------REGISTER-----------------------/*/
 
 .register-container{
-   background-color: #af888d;
+   background-color:white;
     display: grid;
     width: 50%;
     margin: auto;
@@ -91,10 +91,11 @@ body{
     border-radius: 12px;
     outline: none;
     border: 2px solid #380c07;
-    background-color:#161917 ;
+    background-color:#9d67ff ;
     grid-column: 1 / -1;
-    color: #e1e3db;
+    color: #1d0af8;
 }
+
 .register-password-confirm{
     width: 80%;
     margin: auto;
@@ -103,7 +104,6 @@ body{
     border-radius: 12px;
     outline: none;
     border: 2px solid #380c07;
-    background-color:#161917 ;
     grid-column: 1 / -1;
     color: #e1e3db;
 }
@@ -115,7 +115,6 @@ body{
     border-radius: 12px;
     outline: none;
     border: 2px solid #380c07;
-    background-color:#161917 ;
     grid-column: 1 / -1;
     color: #e1e3db;
     
@@ -142,8 +141,7 @@ body{
 #register-gender,#register-birthdate{
     height: 30px;
     border-radius: 8px;
-    border: 1px solid #380c07;
-    background-color:#161917 ;
+    border: 2px solid #380c07;
     color: #e1e3db;
     margin: auto;
     
@@ -177,7 +175,7 @@ body{
     border-radius: 8px;
     border: none;
     border: 2px solid #70160e ;
-    background-color:#161917;
+    background-color:#7f047f;
     color:#e1e3db ;
     margin-top: 15px;
     grid-column: 1 / -1;
@@ -185,6 +183,7 @@ body{
 }
 .register-button:hover{
         outline: 2px solid #e1e3db ;
+        transform: translateY(-2px);
     }
 
 .register-no-acaunt{
@@ -193,12 +192,28 @@ body{
     grid-column: 1 / -1;
     text-decoration: none;
     margin-bottom: 13px;
+    color: #7f047f;
 }
 
 .register-no-acaunt:hover{
     scale: 1.05;
+    
 }
 
 .register-error{
-    color: #e1e3db;
+    color: #000000;
+    font-weight: 700;
+    font-size: 18px;
+    width: 100%;
+    grid-column: 1 / -1;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.register-password-confirm,.register-email,.register-password,.register-name,.register-surname,#register-gender,#register-birthdate{
+    background-color: #d8bad8;
+    color: #7f047f;
+}
+.register-password-confirm::placeholder,.register-email::placeholder,.register-password::placeholder,.register-name::placeholder,.register-surname::placeholder,#register-gender::placeholder,#register-birthdate::placeholder{
+    color: #361635;
 }
