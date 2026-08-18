@@ -8,6 +8,7 @@ const register_password = document.querySelector(".register-password")
 const register_password_confirm = document.querySelector(".register-password-confirm")
 const register_button = document.querySelector(".register-button")
 const register_error = document.querySelector(".register-error")
+const register_error_edad = document.querySelector(".register-error-edad")
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -28,6 +29,29 @@ register_button.addEventListener("click" ,(e) => {
         register_error.textContent = "campos vacios"
         return;
     }
+
+
+    const birthDate = new Date(register_birthdate.value);
+    const today = new Date();
+
+    let age = today.getFullYear() - birthDate.getFullYear();
+
+    const monthDifference = today.getMonth() - birthDate.getMonth();
+
+    if (monthDifference < 0 ||
+    (monthDifference === 0 && today.getDate() < birthDate.getDate())
+    ) {age--;}
+
+    if (age < 12) {
+    register_error_edad.textContent = "eres demasiado joven";
+        return;
+    }else if (age > 99) {
+        register_error_edad.textContent = "eres demasiado mayor";
+        return;
+    }
+
+
+
     if (register_password.value !== register_password_confirm.value) {
         register_error.textContent = "Las contraseñas no coinciden";
         return;

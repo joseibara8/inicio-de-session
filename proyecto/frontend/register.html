@@ -9,13 +9,17 @@
 <body>
     <div class="register-container">
         <input class="register-name" type="text" placeholder="Daniel">
-        <input class="register-surname" type="text" placeholder="Satos Perez" aria-placeholder="genero">
+        <input class="register-surname" type="text" placeholder="Satos Perez">
+        <div>
         <input type="date" id="register-birthdate" name="birthdate">
+        <span class="register-error-edad"></span></div>
+
         <select name="register-gender" id="register-gender">
-                <option value="masculino">Masculino</option>
-                <option value="femenino">Femenino</option>
-                <option value="otro">Otro</option>
-        </select>
+    <option value="" disabled selected hidden>Género</option>
+    <option value="masculino">Masculino</option>
+    <option value="femenino">Femenino</option>
+    <option value="otro">Otro</option>
+</select>
         <input class="register-email" type="email" placeholder="ejemplo@gmail.com">
         <input class="register-password" type="password" placeholder="contraseña">
         <input class="register-password-confirm" type="password" placeholder="contraseña">

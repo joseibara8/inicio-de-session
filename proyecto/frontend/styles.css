@@ -201,7 +201,7 @@ body{
 }
 
 .register-error{
-    color: #000000;
+    color: rgb(173, 3, 3);
     font-weight: 700;
     font-size: 18px;
     width: 100%;
@@ -216,4 +216,8 @@ body{
 }
 .register-password-confirm::placeholder,.register-email::placeholder,.register-password::placeholder,.register-name::placeholder,.register-surname::placeholder,#register-gender::placeholder,#register-birthdate::placeholder{
     color: #361635;
+}
+.register-error-edad{
+    grid-column: 1 / -1;
+    color: rgb(180, 8, 8);
 }
