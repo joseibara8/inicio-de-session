@@ -9,6 +9,8 @@ const register_password_confirm = document.querySelector(".register-password-con
 const register_button = document.querySelector(".register-button")
 const register_error = document.querySelector(".register-error")
 const register_error_edad = document.querySelector(".register-error-edad")
+const register_error_email = document.querySelector(".register-error-email")
+const register_error_contraseña = document.querySelector(".register-error-contraseña")
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -43,22 +45,22 @@ register_button.addEventListener("click" ,(e) => {
     ) {age--;}
 
     if (age < 12) {
-    register_error_edad.textContent = "eres demasiado joven";
+    register_error_edad.textContent = "*eres demasiado joven*";
         return;
     }else if (age > 99) {
-        register_error_edad.textContent = "eres demasiado mayor";
+        register_error_edad.textContent = "*eres demasiado mayor*";
         return;
     }
 
 
 
     if (register_password.value !== register_password_confirm.value) {
-        register_error.textContent = "Las contraseñas no coinciden";
+        register_error_contraseña.textContent = "*Las contraseñas no coinciden*";
         return;
     }
 
     if (!emailRegex.test(register_email.value)) {
-        register_error.textContent = "Correo inválido";
+        register_error_email.textContent = "*Correo inválido*";
         return;
     }
 
@@ -78,10 +80,14 @@ register_button.addEventListener("click" ,(e) => {
     })
     .then(response => response.text())
     .then(data => {
-        register_error.textContent = data;
+        if (data === "*Este correo ya está registrado*") {
+            register_error_email.textContent = data
+        }else{
+            register_error.textContent = data
+        }
     })
     .catch(error => {
         console.error(error);
         register_error.textContent = "Error al conectar con el servidor";
     });
-})
+});

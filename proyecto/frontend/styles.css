@@ -217,7 +217,7 @@ body{
 .register-password-confirm::placeholder,.register-email::placeholder,.register-password::placeholder,.register-name::placeholder,.register-surname::placeholder,#register-gender::placeholder,#register-birthdate::placeholder{
     color: #361635;
 }
-.register-error-edad{
+.register-error-edad,.register-error-email,.register-error-contraseña{
     grid-column: 1 / -1;
     color: rgb(180, 8, 8);
 }
