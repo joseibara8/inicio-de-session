@@ -43,35 +43,45 @@ app.post("/", (req, res) => {
 });
 
 
-app.get("/register", (req, res) => {
-    res.sendFile(path.join(__dirname, "../frontend/register.html"));
-});
-
 app.post("/register", (req, res) => {
 
-    const sql = `
-        INSERT INTO users
-        (name, surname, birthdate, gender, email, password)
-        VALUES (?, ?, ?, ?, ?, ?)
-    `;
+    const checkEmailSql = "SELECT id FROM users WHERE email = ?";
 
-    const values = [
-        req.body.name,
-        req.body.surname,
-        req.body.birthdate,
-        req.body.gender,
-        req.body.email,
-        req.body.password
-    ];
-
-    db.query(sql, values, (err, results) => {
+    db.query(checkEmailSql, [req.body.email], (err, results) => {
 
         if (err) {
             console.error(err);
-            return res.status(500).send("Error al crear usuario");
+            return res.status(500).send("Error al comprobar el correo");
         }
 
-        res.send("Usuario creado correctamente");
+        if (results.length > 0) {
+            return res.status(400).send("Este correo ya está registrado");
+        }
+
+        const sql = `
+            INSERT INTO users
+            (name, surname, birthdate, gender, email, password)
+            VALUES (?, ?, ?, ?, ?, ?)
+        `;
+
+        const values = [
+            req.body.name,
+            req.body.surname,
+            req.body.birthdate,
+            req.body.gender,
+            req.body.email,
+            req.body.password
+        ];
+
+        db.query(sql, values, (err, results) => {
+
+            if (err) {
+                console.error(err);
+                return res.status(500).send("Error al crear usuario");
+            }
+
+            res.send("Usuario creado correctamente");
+        });
     });
 });
 
