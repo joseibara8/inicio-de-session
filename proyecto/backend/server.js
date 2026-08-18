@@ -34,6 +34,9 @@ app.use(express.static(path.join(__dirname, "../frontend")));
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "../frontend/index.html"));
 });
+app.get("/register", (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend/register.html"));
+});
 
 
 app.post("/", (req, res) => {
