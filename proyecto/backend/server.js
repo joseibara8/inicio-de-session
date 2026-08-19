@@ -47,11 +47,60 @@ app.post("/", (req, res) => {
 });
 
 
-app.post("/register", async (req, res) => {
+app.post("/register", (req, res) => {
+
+    if (
+        req.body.name.trim() === "" ||
+        req.body.surname.trim() === "" ||
+        req.body.gender.trim() === "" ||
+        req.body.birthdate.trim() === "" ||
+        req.body.email.trim() === "" ||
+        req.body.password.trim() === "" ||
+        req.body.password_confirm.trim() === ""
+    ) {
+        res.send("campos vacios");
+        return;
+    }
+
+
+    const birthDate = new Date(req.body.birthdate);
+    const today = new Date();
+
+    let age = today.getFullYear() - birthDate.getFullYear();
+
+    const monthDifference = today.getMonth() - birthDate.getMonth();
+
+    if (
+        monthDifference < 0 ||
+        (monthDifference === 0 && today.getDate() < birthDate.getDate())
+    ) {
+        age--;
+    }
+
+    if (age < 12) {
+        res.send("*eres demasiado joven*");
+        return;
+
+    } else if (age > 99) {
+        res.send("*eres demasiado mayor*");
+        return;
+    }
+
+
+    if (req.body.password !== req.body.password_confirm) {
+        res.send("*Las contraseñas no coinciden*");
+        return;
+    }
+
+
+    if (!emailRegex.test(req.body.email)) {
+        res.send("*Correo inválido*");
+        return;
+    }
 
     const checkEmailSql = "SELECT id FROM users WHERE email = ?";
 
-    db.query(checkEmailSql, [req.body.email], (err, results) => {
+    db.query(checkEmailSql, [req.body.email], async (err, results) => {
 
         if (err) {
             console.error(err);
@@ -61,6 +110,7 @@ app.post("/register", async (req, res) => {
         if (results.length > 0) {
             return res.status(400).send("Este correo ya está registrado");
         }
+
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
         const sql = `

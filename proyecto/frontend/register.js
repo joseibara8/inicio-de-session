@@ -75,7 +75,8 @@ register_button.addEventListener("click" ,(e) => {
             birthdate: register_birthdate.value,
             gender: register_gender.value,
             email: register_email.value,
-            password: register_password.value
+            password: register_password.value,
+            password_confirm: register_password_confirm.value
         })
     })
     .then(response => response.text())
