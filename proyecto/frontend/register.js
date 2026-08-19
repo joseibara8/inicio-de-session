@@ -83,9 +83,10 @@ register_button.addEventListener("click" ,(e) => {
     .then(data => {
         if (data === "*Este correo ya está registrado*") {
             register_error_email.textContent = data
-        }else{
+        }else if(data === "Usuario creado correctamente"){
+            register_error.style.color = "green"
             register_error.textContent = data
-        }
+        }register_error.textContent = data
     })
     .catch(error => {
         console.error(error);

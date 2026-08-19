@@ -1,22 +1,22 @@
 body{
     margin:0;
-    background-color: #ffe6ff;
+    background-color: #9DA2AF;
 }
 
 
 .login-container{
-    background-color: #b82536;
+    background-color: #061336;
     display: flex;
     width: 50%;
     margin: auto;
     flex-direction: column;
     margin-top: 50px;
     border-radius: 16px;
-    border: 2px solid #161917;
     text-align: center  ;
+    box-shadow: 0px 15px 30px rgba(0,0,0,0.7);
 }
 .login-tittle{
-    color:#e1e3db ;
+    color:#FFFFFF ;
 }
 
 .login-email,.login-password{
@@ -26,21 +26,38 @@ body{
     height: 33px;
     border-radius: 12px;
     outline: none;
-    border: 2px solid #380c07;
-    background-color:#161917 ;
-    color: #e1e3db;
+    border: none;
+    padding-left: 5px;
+    background-color:#1F2B4B ;
+    color: #AEB5C4;
     
 }
 .login-email{
     margin-top: 0;
 }
 .login-email::placeholder{
-    color:#e1e3db ;
+    color:#AEB5C4  ;
+}
+.div-no-account{
+    display: flex;
 }
 .loging-no-account{
     margin-top: 5px;
-    color: #e1e3db;
+    color: #1F2B4B;
     text-decoration: none;
+    font-size: 13px;
+    margin: auto;
+    margin-top: 20px;
+    font-weight: 900;
+    border: 2px solid;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+
 }
 
 .loging-no-account:hover{
@@ -53,36 +70,53 @@ body{
     margin-bottom: 10px;
     border-radius: 12px;
     border: none;
-    border: 2px solid #be847e ;
-    background-color:#161917;
-    color:#e1e3db ;
-    margin-top: 15px;
+    border: none ;
+    background-color:#3282F6;
+    color:#FFFFFF ;
+    margin-top: 25px;
+    margin-bottom: 30px;
 }
 
 .login-button:hover{
     scale: 1.1;
+    box-shadow: 0px 15px 30px rgba(255, 255, 255, 0.1);
 }
 
 .login-email:hover{
-    outline: 2px solid #e1e3db
+    outline: 2px solid #AEB5C4 
 }
 .login-password:hover{
-    outline: 2px solid #e1e3db
+    outline: 2px solid #AEB5C4 
 }
 
 /*-------------------REGISTER-----------------------/*/
 
 .register-container{
-   background-color:white;
+   background-color:#061336;
     display: grid;
     width: 50%;
     margin: auto;
     grid-template-columns: 1fr 1fr;
     margin-top: 50px;
     border-radius: 16px;
-    border: 2px solid #161917;
+    border: none;
     text-align: center  ; 
+    box-shadow: 0px 15px 30px rgba(0,0,0,0.7);
 }
+h2{
+    grid-column: 1 / -1;
+    color: #FFFFFF;
+    margin-bottom: 0;
+}
+.nombre{
+    margin-bottom: 0;
+    color: #AEB5C4 ;
+    margin-top: 20px;
+    text-align: start;
+    margin-left: 20%;
+    margin-bottom: 1px;
+}
+
 .register-email,.register-password{
     width: 80%;
     margin: auto;
@@ -99,13 +133,13 @@ body{
 .register-password-confirm{
     width: 80%;
     margin: auto;
-    margin-top: 20px;
+    margin-top: 10px;
     height: 33px;
     border-radius: 12px;
     outline: none;
     border: 2px solid #380c07;
     grid-column: 1 / -1;
-    color: #e1e3db;
+    color: #AEB5C4 ;
 }
 .register-name,.register-surname{
     width: 80%;
@@ -116,33 +150,32 @@ body{
     outline: none;
     border: 2px solid #380c07;
     grid-column: 1 / -1;
-    color: #e1e3db;
+    color: #AEB5C4 ;
     
 }
 .register-name:hover{
-    outline: 2px solid #e1e3db
+    outline: 2px solid #AEB5C4 
 }
 #register-birthdate:hover{
-    outline: 2px solid #e1e3db
+    outline: 2px solid #AEB5C4 
 }
 #register-gender:hover{
-    outline: 2px solid #e1e3db
+    outline: 2px solid #AEB5C4 
 }
 .register-password:hover{
-   outline: 2px solid #e1e3db 
+   outline: 2px solid #AEB5C4  
 }
 .register-email:hover{
-   outline: 2px solid #e1e3db 
+   outline: 2px solid #AEB5C4 
 }
 
 .register-surname:hover{
-    outline: 2px solid #e1e3db ;
+    outline: 2px solid #AEB5C4  ;
 }
 #register-gender,#register-birthdate{
     height: 30px;
     border-radius: 8px;
-    border: 2px solid #380c07;
-    color: #e1e3db;
+    color: #AEB5C4 ;
     margin: auto;
     
 }
@@ -174,25 +207,26 @@ body{
     margin-bottom: 10px;
     border-radius: 8px;
     border: none;
-    border: 2px solid #70160e ;
-    background-color:#7f047f;
-    color:#e1e3db ;
+    border: none;
+    background-color:#2358a8;
+    color:#FFFFFF ;
     margin-top: 15px;
     grid-column: 1 / -1;
     margin-bottom: 0;
 }
 .register-button:hover{
-        outline: 2px solid #e1e3db ;
+        outline: 2px solid #AEB5C4 ;
         transform: translateY(-2px);
+        box-shadow: 0px 15px 30px rgba(230, 219, 114, 0.15);
     }
 
 .register-no-acaunt{
     margin-top: 5px;
-    color: #e1e3db;
+    color: #AEB5C4 ;
     grid-column: 1 / -1;
     text-decoration: none;
     margin-bottom: 13px;
-    color: #7f047f;
+    color: #FFFFFF;
 }
 
 .register-no-acaunt:hover{
@@ -211,13 +245,22 @@ body{
 }
 
 .register-password-confirm,.register-email,.register-password,.register-name,.register-surname,#register-gender,#register-birthdate{
-    background-color: #d8bad8;
+    background-color: #1F2B4B;
     color: #7f047f;
+    border: none;
+    color:#9DA2AF; 
+    padding-left: 5px;
 }
 .register-password-confirm::placeholder,.register-email::placeholder,.register-password::placeholder,.register-name::placeholder,.register-surname::placeholder,#register-gender::placeholder,#register-birthdate::placeholder{
-    color: #361635;
+    color: #9DA2AF;;
 }
 .register-error-edad,.register-error-email,.register-error-contraseña{
     grid-column: 1 / -1;
     color: rgb(180, 8, 8);
+}
+
+.login-button-error{
+    
+}.register-name,.register-surname,.register-email{
+    margin-top: 0;
 }
