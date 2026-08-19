@@ -58,8 +58,7 @@ app.post("/register", (req, res) => {
         req.body.password.trim() === "" ||
         req.body.password_confirm.trim() === ""
     ) {
-        res.send("campos vacios");
-        return;
+        return res.status(400).send("Campos vacíos");
     }
 
 
@@ -78,24 +77,24 @@ app.post("/register", (req, res) => {
     }
 
     if (age < 12) {
-        res.send("*eres demasiado joven*");
-        return;
+        return res.status(400).send("*eres demasiado joven*");
+        
 
     } else if (age > 99) {
-        res.send("*eres demasiado mayor*");
-        return;
+        return res.status(400).send("*eres demasiado mayor*");
+        
     }
 
 
     if (req.body.password !== req.body.password_confirm) {
-        res.send("*Las contraseñas no coinciden*");
-        return;
+        return res.status(400)("*Las contraseñas no coinciden*");
+        
     }
 
 
     if (!emailRegex.test(req.body.email)) {
-        res.send("*Correo inválido*");
-        return;
+        return res.status(400)("*Correo inválido*");
+        
     }
 
     const checkEmailSql = "SELECT id FROM users WHERE email = ?";
