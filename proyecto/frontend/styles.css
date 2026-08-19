@@ -255,12 +255,10 @@ h2{
     color: #9DA2AF;;
 }
 .register-error-edad,.register-error-email,.register-error-contraseña{
-    grid-column: 1 / -1;
+    
     color: rgb(180, 8, 8);
 }
 
-.login-button-error{
-    
-}.register-name,.register-surname,.register-email{
+.register-name,.register-surname,.register-email{
     margin-top: 0;
 }

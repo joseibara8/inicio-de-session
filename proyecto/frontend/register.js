@@ -17,7 +17,10 @@ const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 register_button.addEventListener("click" ,(e) => {
     e.preventDefault();
-
+    register_error.textContent = ""
+    register_error_contraseña.textContent = ""
+    register_error_email.textContent = ""
+    register_error_edad.textContent = ""
     if (
         register_name.value.trim() === "" ||
         register_surname.value.trim() === "" ||
@@ -31,6 +34,7 @@ register_button.addEventListener("click" ,(e) => {
         register_error.textContent = "campos vacios"
         return;
     }
+
 
 
     const birthDate = new Date(register_birthdate.value);
