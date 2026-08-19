@@ -3,6 +3,7 @@ const path = require("path");
 const mysql = require("mysql2");
 const bcrypt = require("bcrypt");
 const { log } = require("console");
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const db = mysql.createConnection({
     host: "localhost",
@@ -52,14 +53,21 @@ app.post("/login", (req, res) => {
 
     const sql = "SELECT * FROM users WHERE email = ?";
 
-    db.query(sql, [req.body.email], (err, results) => {
+    db.query(sql, [req.body.email], async (err, results) => {
 
         if (err) {
             console.error(err);
             return res.status(500).send("Error del servidor");
         }
-
         console.log(results);
+    
+        const user = results[0];
+
+        const passwordCorrecta = await bcrypt.compare(
+            req.body.password,
+            user.password
+        );
+        console.log(passwordCorrecta);
     });
 });
 
