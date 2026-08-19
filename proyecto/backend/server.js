@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const mysql = require("mysql2");
+const bcrypt = require("bcrypt");
 
 const db = mysql.createConnection({
     host: "localhost",
@@ -46,7 +47,7 @@ app.post("/", (req, res) => {
 });
 
 
-app.post("/register", (req, res) => {
+app.post("/register", async (req, res) => {
 
     const checkEmailSql = "SELECT id FROM users WHERE email = ?";
 
@@ -60,6 +61,7 @@ app.post("/register", (req, res) => {
         if (results.length > 0) {
             return res.status(400).send("Este correo ya está registrado");
         }
+        const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
         const sql = `
             INSERT INTO users
@@ -73,7 +75,7 @@ app.post("/register", (req, res) => {
             req.body.birthdate,
             req.body.gender,
             req.body.email,
-            req.body.password
+            hashedPassword
         ];
 
         db.query(sql, values, (err, results) => {
