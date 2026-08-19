@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const mysql = require("mysql2");
 const bcrypt = require("bcrypt");
+const { log } = require("console");
 
 const db = mysql.createConnection({
     host: "localhost",
@@ -32,7 +33,11 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "../frontend")));
 
 
-app.get("/", (req, res) => {
+
+
+
+
+app.get("/login", (req, res) => {
     res.sendFile(path.join(__dirname, "../frontend/index.html"));
 });
 app.get("/register", (req, res) => {
@@ -40,10 +45,22 @@ app.get("/register", (req, res) => {
 });
 
 
-app.post("/", (req, res) => {
+app.post("/login", (req, res) => {
+
+    console.log("LLEGÓ UNA PETICIÓN A /LOGIN");
     console.log(req.body);
 
-    res.send("Usuario recibido");
+    const sql = "SELECT * FROM users WHERE email = ?";
+
+    db.query(sql, [req.body.email], (err, results) => {
+
+        if (err) {
+            console.error(err);
+            return res.status(500).send("Error del servidor");
+        }
+
+        console.log(results);
+    });
 });
 
 
@@ -87,13 +104,13 @@ app.post("/register", (req, res) => {
 
 
     if (req.body.password !== req.body.password_confirm) {
-        return res.status(400)("*Las contraseñas no coinciden*");
+        return res.status(400).send("*Las contraseñas no coinciden*");
         
     }
 
 
     if (!emailRegex.test(req.body.email)) {
-        return res.status(400)("*Correo inválido*");
+        return res.status(400).send("*Correo inválido*");
         
     }
 
