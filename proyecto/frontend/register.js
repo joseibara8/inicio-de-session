@@ -90,10 +90,13 @@ register_button.addEventListener("click" ,(e) => {
         }else if(data === "Usuario creado correctamente"){
             register_error.style.color = "green"
             register_error.textContent = data
+        }else if (data === "vienvenido"){
+            register_error.textContent = data
         }register_error.textContent = data
     })
     .catch(error => {
         console.error(error);
         register_error.textContent = "Error al conectar con el servidor";
     });
+    
 });

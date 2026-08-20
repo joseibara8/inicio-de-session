@@ -51,23 +51,34 @@ app.post("/login", (req, res) => {
     console.log("LLEGÓ UNA PETICIÓN A /LOGIN");
     console.log(req.body);
 
+    
+
     const sql = "SELECT * FROM users WHERE email = ?";
 
     db.query(sql, [req.body.email], async (err, results) => {
-
-        if (err) {
-            console.error(err);
-            return res.status(500).send("Error del servidor");
-        }
         console.log(results);
-    
+        
+        if (err) {
+            return res.status(500).send("error en la base de datos");
+        }
+        
+        if (results.length === 0) {
+            return res.status(400).send("El correo no existe");
+        }
+        
         const user = results[0];
 
         const passwordCorrecta = await bcrypt.compare(
             req.body.password,
             user.password
         );
+
         console.log(passwordCorrecta);
+        if (passwordCorrecta) {
+        return res.send("exito");
+}
+
+        return res.status(400).send("La Contraseña es Incorrecta");
     });
 });
 

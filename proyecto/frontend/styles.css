@@ -22,7 +22,7 @@ body{
 .login-email,.login-password{
     width: 80%;
     margin: auto;
-    margin-top: 20px;
+    margin-top: 0px;
     height: 33px;
     border-radius: 12px;
     outline: none;
@@ -63,6 +63,12 @@ body{
 .loging-no-account:hover{
     scale: 1.05;
 }
+.login-button-error{
+    color: #AEB5C4;
+    margin-top: 0;
+    margin-bottom: 20px;
+    
+}
 .login-button{
     width: 130px;
     padding: 10px;
@@ -74,7 +80,7 @@ body{
     background-color:#3282F6;
     color:#FFFFFF ;
     margin-top: 25px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .login-button:hover{
@@ -87,6 +93,24 @@ body{
 }
 .login-password:hover{
     outline: 2px solid #AEB5C4 
+}
+
+
+.login-email-label,.login-contraseña-label{
+    margin-bottom: 0;
+    color: #AEB5C4 ;
+    margin-top: 20px;
+    text-align: start;
+    margin-left: 10%;
+    margin-bottom: 1px;
+}
+.login-email-error,.login-contraseña-error{
+    margin-bottom: 0;
+    color: #851c1a ;
+    margin-top: 0px;
+    text-align: start;
+    margin-left: 10%;
+    margin-bottom: 1px;
 }
 
 /*-------------------REGISTER-----------------------/*/
