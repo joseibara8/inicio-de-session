@@ -1,3 +1,5 @@
+
+
 const register_container = document.querySelector(".register-container")
 const register_name = document.querySelector(".register-name")
 const register_surname = document.querySelector(".register-surname")
@@ -11,12 +13,17 @@ const register_error = document.querySelector(".register-error")
 const register_error_edad = document.querySelector(".register-error-edad")
 const register_error_email = document.querySelector(".register-error-email")
 const register_error_contraseña = document.querySelector(".register-error-contraseña")
+const codigo_texarea = document.querySelector(".codigo-texarea")
+const codigo_button = document.querySelector(".codigo-button")
+const codigo_error = document.querySelector(".codigo-error")
+
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 
 register_button.addEventListener("click" ,(e) => {
     e.preventDefault();
+    console.log("hola3");
     register_error.textContent = ""
     register_error_contraseña.textContent = ""
     register_error_email.textContent = ""
@@ -90,6 +97,7 @@ register_button.addEventListener("click" ,(e) => {
         }else if(data === "Usuario creado correctamente"){
             register_error.style.color = "green"
             register_error.textContent = data
+            window.location.assign('/codigo')
         }else if (data === "vienvenido"){
             register_error.textContent = data
         }register_error.textContent = data
@@ -98,5 +106,27 @@ register_button.addEventListener("click" ,(e) => {
         console.error(error);
         register_error.textContent = "Error al conectar con el servidor";
     });
-    
 });
+
+
+codigo_button.addEventListener("click",(e) =>{
+    e.preventDefault()
+
+    if(codigo_texarea === ""){
+        codigo_error.textContent = "campos vacios"
+    }
+    
+    fetch("/codigo",{
+        method: "post",
+        headers:{
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            codigo: codigo.value
+        })
+    })
+    .then(response => response.text())
+    .then(data =>{
+        codigo_error.textContent = data
+    })
+})

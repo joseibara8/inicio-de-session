@@ -44,6 +44,10 @@ app.get("/login", (req, res) => {
 app.get("/register", (req, res) => {
     res.sendFile(path.join(__dirname, "../frontend/register.html"));
 });
+app.get("/codigo", (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend/codigo.html"));
+});
+
 
 
 app.post("/login", (req, res) => {
@@ -174,6 +178,10 @@ app.post("/register", (req, res) => {
         });
     });
 });
+app.get("/codigo",(req,res) =>{
+    console.log(req);
+    res.send("recivido")
+})
 
 app.listen(3000, () => {
     console.log("Servidor funcionando en http://localhost:3000");

@@ -304,14 +304,19 @@ h2{
 
 .codigo-titulo{
     font-size: large;
+    
 }
 
 .codigo-texto{
+    width: 80%;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 17px;
     font-size: medium;
     color: #AEB5C4;
 }
 
-#codigo-texarea{
+.codigo-texarea{
     border-radius: 8px;
     width: 30%;
     margin: auto;
@@ -327,18 +332,18 @@ h2{
     margin-bottom: 15px;
     text-align: center;
 }
-#codigo-texarea:focus{
+.codigo-texarea:focus{
     border: none;
     outline: none;
 }
 
 .codigo-button{
-    width: 30%;
-    height: 20px;
+    width: 40%;
+    height: 30px;
     border-radius: 20px;
     border: none;
     margin: auto;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     background-color: #3282F6;
     color: #FFFFFF;
     margin-top: 0;
@@ -346,5 +351,10 @@ h2{
 }
 .codigo-button:hover{
     transform: translateY(-1px);
-    box-shadow: 0px 5px 15px rgba(230, 219, 114,.2);
+    box-shadow: 0px 10px 25px rgba(39, 93, 162, 0.3);
+}
+
+.codigo-error{
+    color: red;
+    margin-bottom: 10px;
 }
