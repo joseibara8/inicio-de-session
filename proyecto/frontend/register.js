@@ -13,9 +13,6 @@ const register_error = document.querySelector(".register-error")
 const register_error_edad = document.querySelector(".register-error-edad")
 const register_error_email = document.querySelector(".register-error-email")
 const register_error_contraseña = document.querySelector(".register-error-contraseña")
-const codigo_texarea = document.querySelector(".codigo-texarea")
-const codigo_button = document.querySelector(".codigo-button")
-const codigo_error = document.querySelector(".codigo-error")
 
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -109,24 +106,3 @@ register_button.addEventListener("click" ,(e) => {
 });
 
 
-codigo_button.addEventListener("click",(e) =>{
-    e.preventDefault()
-
-    if(codigo_texarea === ""){
-        codigo_error.textContent = "campos vacios"
-    }
-    
-    fetch("/codigo",{
-        method: "post",
-        headers:{
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            codigo: codigo.value
-        })
-    })
-    .then(response => response.text())
-    .then(data =>{
-        codigo_error.textContent = data
-    })
-})

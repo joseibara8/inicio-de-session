@@ -178,8 +178,9 @@ app.post("/register", (req, res) => {
         });
     });
 });
-app.get("/codigo",(req,res) =>{
+app.post("/codigo",(req,res) =>{
     console.log(req);
+    console.log(res);
     res.send("recivido")
 })
 
