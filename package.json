@@ -2,7 +2,8 @@
   "dependencies": {
     "bcrypt": "^6.0.0",
     "express": "^5.2.1",
-    "mysql2": "^3.23.3"
+    "mysql2": "^3.23.3",
+    "nodemailer": "^9.0.5"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"

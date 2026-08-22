@@ -4,6 +4,15 @@ const mysql = require("mysql2");
 const bcrypt = require("bcrypt");
 const { log } = require("console");
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const nodemailer = require("nodemailer");
+
+const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+        user: "registropagina8@gmail.com",
+        pass: "wvulzujqmtebjpmx"
+    }
+});
 
 const db = mysql.createConnection({
     host: "localhost",
@@ -11,7 +20,6 @@ const db = mysql.createConnection({
     password: "holapas",
     database: "registro_app"
 });
-
 db.connect((err) => {
     if (err) {
         console.error("Error al conectar con MySQL:", err);
@@ -151,11 +159,19 @@ app.post("/register", (req, res) => {
         }
 
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
-
+        const codigo = Math.floor(100000 + Math.random() * 900000);
+        const expires_at = new Date(Date.now() + 5 * 60 * 1000);
+        const mailOptions = {
+        from: "registropagina8@gmail.com",
+        to: req.body.email,
+        subject: "Código de confirmación",
+        text: `Tu código de confirmación es: ${codigo}`
+        };
+        
         const sql = `
-            INSERT INTO users
-            (name, surname, birthdate, gender, email, password)
-            VALUES (?, ?, ?, ?, ?, ?)
+            INSERT INTO pending_users
+            (name, surname, birthdate, gender, email, password,code,expires_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         `;
 
         const values = [
@@ -164,7 +180,9 @@ app.post("/register", (req, res) => {
             req.body.birthdate,
             req.body.gender,
             req.body.email,
-            hashedPassword
+            hashedPassword,
+            codigo,
+            expires_at
         ];
 
         db.query(sql, values, (err, results) => {
@@ -174,16 +192,69 @@ app.post("/register", (req, res) => {
                 return res.status(500).send("Error al crear usuario");
             }
 
-            res.send("Usuario creado correctamente");
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.error(error);
+                return res.status(500).send("Error al enviar el correo");
+            }
+            console.log("Correo enviado");
+            res.send("exito al registrarse")
+            });
         });
     });
 });
+
 app.post("/codigo",(req,res) =>{
-    console.log(req);
-    console.log(res);
-    res.send("recivido")
+    
+    const checkcodigo = "SELECT * FROM pending_users WHERE code = ?"
+    db.query(checkcodigo,[req.body.codigo],(err,results) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send("Error al comprobar el correo");
+        }
+        if (results.length === 0) {
+            console.log(results);
+            
+            return res.send("codigo incorrecto")
+        }
+        const user = results[0];
+        const sql = `
+            INSERT INTO users
+            (name, surname, birthdate, gender, email, password)
+            VALUES (?, ?, ?, ?, ?, ?)
+        `;
+
+        const values = [
+            user.name,
+            user.surname,
+            user.birthdate,
+            user.gender,
+            user.email,
+            user.password        
+        ];
+        db.query(sql, values, (err, results) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).send("Error al comprobar el correo");
+            }
+            const deleteSql = "DELETE FROM pending_users WHERE id = ?";
+
+            db.query(deleteSql, [user.id], (err) => {
+                if (err) {
+                console.error(err);
+                return res.status(500).send("Cuenta creada, pero hubo un error al limpiar los datos");
+            }
+
+        res.send("Cuenta creada con éxito");
+});
+        })
+    })
 })
 
 app.listen(3000, () => {
     console.log("Servidor funcionando en http://localhost:3000");
 });
+
+    
+
+       

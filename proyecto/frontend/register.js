@@ -91,10 +91,11 @@ register_button.addEventListener("click" ,(e) => {
     .then(data => {
         if (data === "*Este correo ya está registrado*") {
             register_error_email.textContent = data
-        }else if(data === "Usuario creado correctamente"){
+        }else if(data === "exito al registrarse"){
             register_error.style.color = "green"
             register_error.textContent = data
             window.location.assign('/codigo')
+            
         }else if (data === "vienvenido"){
             register_error.textContent = data
         }register_error.textContent = data
