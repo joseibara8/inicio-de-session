@@ -21,6 +21,11 @@ codigo_button.addEventListener("click",(e) =>{
     })
     .then(response => response.text())
     .then(data =>{
+        if(data === "Cuenta creada con éxito"){
+            codigo_error.style.color = "green"
+            codigo_error = data
+            window.location.assign('/login')
+        }
         codigo_error.textContent = data
     })
 })

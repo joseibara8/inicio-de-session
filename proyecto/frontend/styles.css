@@ -19,6 +19,8 @@ body{
     color:#FFFFFF ;
 }
 
+
+
 .login-email,.login-password{
     width: 80%;
     margin: auto;
@@ -111,6 +113,11 @@ body{
     text-align: start;
     margin-left: 10%;
     margin-bottom: 1px;
+}
+.ojo{
+    background-color: red;
+    width: 10%;
+    border: none;
 }
 
 /*-------------------REGISTER-----------------------/*/
