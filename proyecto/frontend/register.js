@@ -13,9 +13,21 @@ const register_error = document.querySelector(".register-error")
 const register_error_edad = document.querySelector(".register-error-edad")
 const register_error_email = document.querySelector(".register-error-email")
 const register_error_contraseña = document.querySelector(".register-error-contraseña")
-
+const ojoConfirm = document.querySelector(".ojo-confirm");
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+// Mostrar/ocultar contraseña de confirmación en registro - CORREGIDO: ojo cerrado cuando password está oculto
+ojoConfirm.addEventListener("click", function() {
+    if (register_password_confirm.type === "password") {
+        register_password_confirm.type = "text";
+        this.querySelector(".material-symbols-outlined").textContent = "visibility";
+    } else {
+        register_password_confirm.type = "password";
+        this.querySelector(".material-symbols-outlined").textContent = "visibility_off";
+    }
+});
 
 
 register_button.addEventListener("click" ,(e) => {
@@ -96,7 +108,7 @@ register_button.addEventListener("click" ,(e) => {
             register_error.textContent = data
             window.location.assign('/codigo')
             
-        }else if (data === "vienvenido"){
+        }else if (data === "bienvenido"){
             register_error.textContent = data
         }register_error.textContent = data
     })

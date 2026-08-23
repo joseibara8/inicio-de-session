@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const path = require("path");
 const mysql = require("mysql2");
@@ -6,19 +7,21 @@ const { log } = require("console");
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const nodemailer = require("nodemailer");
 
+
+
 const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-        user: "registropagina8@gmail.com",
-        pass: "wvulzujqmtebjpmx"
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
     }
 });
 
 const db = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "holapas",
-    database: "registro_app"
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME
 });
 db.connect((err) => {
     if (err) {

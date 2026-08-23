@@ -1,4 +1,4 @@
-console.log("LOGIN.JS FUNCIONA");
+
 const login_container = document.querySelector(".login-container");
 const login_email = document.querySelector(".login-email");
 const login_password = document.querySelector(".login-password");
@@ -6,7 +6,7 @@ const login_button = document.querySelector(".login-button");
 const login_button_error = document.querySelector(".login-button-error");
 const login_email_error = document.querySelector(".login-email-error");
 const login_contraseña_error = document.querySelector(".login-contraseña-error");
-
+const login_ojo = document.querySelector(".ojo");
 
 
 login_button.addEventListener("click", (e) => {
@@ -49,4 +49,17 @@ login_button.addEventListener("click", (e) => {
         console.error(error);
         login_button_error.textContent = "Error al conectar con el servidor";
     });
+});
+
+// Mostrar/ocultar contraseña en login
+
+// Mostrar/ocultar contraseña en login - CORREGIDO: ojo cerrado cuando password está oculto
+login_ojo.addEventListener("click", function() {
+    if (login_password.type === "password") {
+        login_password.type = "text";
+        this.querySelector(".material-symbols-outlined").textContent = "visibility";
+    } else {
+        login_password.type = "password";
+        this.querySelector(".material-symbols-outlined").textContent = "visibility_off";
+    }
 });

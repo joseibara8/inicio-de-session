@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
     <link rel="stylesheet" href="styles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,7 +29,10 @@
 
         <input class="register-password" type="password" placeholder="contraseña">
         <span class="register-error-contraseña"></span>
-        <input class="register-password-confirm" type="password" placeholder="contraseña">
+        <div class="register-password-container">
+            <input class="register-password-confirm" type="password" placeholder="contraseña">
+            <button class="ojo-confirm"><span class="material-symbols-outlined">visibility_off</span></button>
+        </div>
         <button  class="register-button">Crear Cuenta</button>
         <span class="register-error"></span>
     </div>
