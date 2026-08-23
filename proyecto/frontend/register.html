@@ -14,29 +14,30 @@
         <input class="register-name" type="text" placeholder="Daniel">
         <label class="nombre" for="">Apellido</label>
         <input class="register-surname" type="text" placeholder="Satos Perez">
-        <input type="date" id="register-birthdate" name="birthdate">   
+        <div class="ingaturoña">
+            <input type="date" id="register-birthdate" name="birthdate">   
         <select name="register-gender" id="register-gender">
             <option value="" disabled selected hidden>Género</option>
             <option value="masculino">Masculino</option>
             <option value="femenino">Femenino</option>
             <option value="otro">Otro</option>
         </select>
+        </div>
         <span class="register-error-edad"></span>
         <span></span>
         <label class="nombre" for="">Email</label>
+        <span></span>
         <input class="register-email" type="email" placeholder="ejemplo@gmail.com">
         <span class="register-error-email"></span>
-
-        <input class="register-password" type="password" placeholder="contraseña">
-        <span class="register-error-contraseña"></span>
         <div class="register-password-container">
-            <input class="register-password-confirm" type="password" placeholder="contraseña">
-            <button class="ojo-confirm"><span class="material-symbols-outlined">visibility_off</span></button>
-        </div>
+            <input class="register-password" type="password" placeholder="contraseña">
+            <button class="ojo-confirm"><span class="material-symbols-outlined">visibility</span></button>
+        </div><input class="register-password-confirm" type="password" placeholder="contraseña">
+        <span class="register-error-contraseña"></span>
         <button  class="register-button">Crear Cuenta</button>
         <span class="register-error"></span>
     </div>
-    <div class="div-no-account"><a href="/login" class="loging-no-account" >No tienes cuenta ¿quieres crear una cuenta?</a></div>
+    <div class="div-no-account"><a href="/login" class="loging-no-account" >Ya tienes cuenta ¿quieres iniciar iniciar session?</a></div>
     <script src="register.js"></script>
 </body>
 </html>

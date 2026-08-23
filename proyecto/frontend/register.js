@@ -20,11 +20,13 @@ const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 // Mostrar/ocultar contraseña de confirmación en registro - CORREGIDO: ojo cerrado cuando password está oculto
 ojoConfirm.addEventListener("click", function() {
-    if (register_password_confirm.type === "password") {
+    if (register_password_confirm.type === "password" && register_password.type === "password" ) {
         register_password_confirm.type = "text";
+        register_password.type = "text";
         this.querySelector(".material-symbols-outlined").textContent = "visibility";
     } else {
         register_password_confirm.type = "password";
+        register_password.type = "password";
         this.querySelector(".material-symbols-outlined").textContent = "visibility_off";
     }
 });
