@@ -1,6 +1,13 @@
 body{
     margin:0;
-    background-color: #9DA2AF;
+    background: linear-gradient(
+        to right,
+        #061336,
+        #061336,
+        #616875,
+        #061336,
+        #061336
+    );
 }
 
 
@@ -337,9 +344,14 @@ h2{
 /*-----------CODIGO-------------*/
 
 .codigo-box{
-    background-color:#061336;
+     background: linear-gradient(
+        #061336,
+        #061336,
+        #061336,
+        #1b2a4daf
+    );
     display: grid;
-    width: 50%;
+    width: 60%;
     margin: auto;
     grid-template-columns: r 1fr;
     margin-top: 50px;
@@ -347,6 +359,7 @@ h2{
     border: none;
     text-align: center  ; 
     box-shadow: 0px 15px 30px rgba(0,0,0,0.7);
+    
 }
 
 .codigo-titulo{
@@ -357,10 +370,9 @@ h2{
 .codigo-texto{
     width: 80%;
     margin: auto;
-    margin-top: 10px;
+    margin-top: 20px;
     margin-bottom: 17px;
-    font-size: medium;
-    color: #AEB5C4;
+    color: #ffffff;
 }
 
 .codigo-texarea{
@@ -385,20 +397,22 @@ h2{
 }
 
 .codigo-button{
-    width: 40%;
-    height: 30px;
+    padding: 15px;
+    padding-left: 22px;
+    padding-right: 22px;
+    font-size: 17px;
     border-radius: 20px;
-    border: none;
     margin: auto;
-    margin-bottom: 15px;
-    background-color: #3282F6;
+    background-color: #0e3264;
+    border: 2px solid #061336;
     color: #FFFFFF;
     margin-top: 0;
+    margin-bottom: 20px;
     
 }
 .codigo-button:hover{
-    transform: translateY(-1px);
-    box-shadow: 0px 10px 25px rgba(39, 93, 162, 0.3);
+    scale: 1.02;
+    box-shadow: 0px 20px 25px rgba(15, 43, 81, 0.3);
 }
 
 .codigo-error{
@@ -439,7 +453,6 @@ h2{
     border-radius: 12px;
     outline: none;
     grid-column: 1 / -1;
-
 }
 /*poner esto en responsive*/
 .ingaturoña{
@@ -448,11 +461,51 @@ h2{
 
 }
 .register_error_edad{
-    
+   
 }
 
 .register-error-contraseña{
     margin: auto;
     grid-column: 1 / -1;
     width: 80%;
+}
+
+.codigo{
+    border:#061336;
+    background-color: #1f2b4b;
+    height: 55px;
+    border: 2px solid #9da2af6b;
+    border-radius: 16px;
+    text-align: center;
+    align-items: center;
+    font-size: 36px;
+    color: black;
+    font-weight: 800;
+}
+.prueva:focus{
+        outline: 0px solid #9da2af6b;
+}
+
+.prueva:hover{
+    scale: 1.1;
+}
+
+.contenedor-prueva{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr  ;
+    gap: 6px;
+    width: 90%;
+    margin: auto;
+    margin-bottom: 35px;
+    margin-top: 15px;
+    
+}
+
+.logo{
+    margin-top: 20px;
+    color: #FFFFFF;
+}
+
+.logo span{
+    font-size:60px;
 }
