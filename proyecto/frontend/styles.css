@@ -518,3 +518,16 @@ h2{
     width: 80px;
     height: 80px;
 }
+
+.loging-no-account{
+    color: white;
+}
+@media (max-width: 450px) {
+    .login-container{
+        width: 90%;
+    }
+    .register-container{
+         width: 90%;
+    }
+    
+}
