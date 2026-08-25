@@ -1,6 +1,5 @@
 # Environment variables - do not commit real credentials
 .env
-
 !.env.example
 
 # Node modules
