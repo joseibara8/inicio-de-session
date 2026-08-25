@@ -47,10 +47,11 @@ app.use(express.static(path.join(__dirname, "../frontend")));
 
 
 
-
-
-app.get("/login", (req, res) => {
+app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "../frontend/index.html"));
+});
+app.get("/login", (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend/login.html"));
 });
 app.get("/register", (req, res) => {
     res.sendFile(path.join(__dirname, "../frontend/register.html"));
@@ -59,7 +60,10 @@ app.get("/codigo", (req, res) => {
     res.sendFile(path.join(__dirname, "../frontend/codigo.html"));
 });
 
-
+app.post("/",(req,res) => {
+    console.log(hola);
+    
+})
 
 app.post("/login", (req, res) => {
 
@@ -168,7 +172,7 @@ app.post("/register", (req, res) => {
         from: "registropagina8@gmail.com",
         to: req.body.email,
         subject: "Código de confirmación",
-        text: `Tu código de confirmación es: ${codigo}`
+        text: ` Hola no compartas el siguiente codigo Tu código de confirmación es: ${codigo}`
         };
         
         const sql = `
@@ -254,6 +258,6 @@ app.post("/codigo",(req,res) =>{
     })
 })
 
-app.listen(3000, () => {
+app.listen(4000, () => {
     console.log("Servidor funcionando en http://localhost:4000");
 });
