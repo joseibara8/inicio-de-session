@@ -1,7 +1,7 @@
 # Environment variables - do not commit real credentials
 .env
-.env.*
-! backend/.env.example
+
+!.env.example
 
 # Node modules
 node_modules/
