@@ -31,14 +31,22 @@ db.connect((err) => {
 
     console.log("Conectado a MySQL");
 });
-db.query("SELECT * FROM users", (err, results) => {
-    if (err) {
-        console.error(err);
-        return;
-    }
 
-    console.log(results);
-});
+setInterval(() => {
+    const sql = "DELETE FROM pending_users WHERE expires_at < NOW()";
+
+    db.query(sql, (err, results) => {
+        if (err) {
+            console.error("Error eliminando usuarios expirados:", err);
+            return;
+        }
+
+        if (results.affectedRows > 0) {
+            console.log(`Se eliminaron ${results.affectedRows} usuarios expirados`);
+        }
+    });
+}, 60 * 1000);
+
 const app = express();
 
 app.use(express.json());
@@ -66,12 +74,10 @@ app.post("/",(req,res) => {
 })
 
 app.post("/login", (req, res) => {
-
-    console.log("LLEGÓ UNA PETICIÓN A /LOGIN");
-    console.log(req.body);
-
-    
-
+    if (req.body.login_email.trim() === "" || 
+        req.body.login_password.trim() === "") {
+        return res.status(400).send("Campos vacíos");
+    }
     const sql = "SELECT * FROM users WHERE email = ?";
 
     db.query(sql, [req.body.email], async (err, results) => {
@@ -213,7 +219,7 @@ app.post("/register", (req, res) => {
 
 app.post("/codigo",(req,res) =>{
     
-    const checkcodigo = "SELECT * FROM pending_users WHERE code = ?"
+    const checkcodigo = "SELECT * FROM pending_users WHERE code = ? AND expires_at > NOW()";
     db.query(checkcodigo,[req.body.codigo],(err,results) => {
         if (err) {
             console.error(err);

@@ -18,7 +18,7 @@ const ojoConfirm = document.querySelector(".ojo-confirm");
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 
-// Mostrar/ocultar contraseña de confirmación en registro - CORREGIDO: ojo cerrado cuando password está oculto
+
 ojoConfirm.addEventListener("click", function() {
     if (register_password_confirm.type === "password" && register_password.type === "password" ) {
         register_password_confirm.type = "text";

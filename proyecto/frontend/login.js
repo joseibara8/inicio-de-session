@@ -51,10 +51,8 @@ login_button.addEventListener("click", (e) => {
     });
 });
 
-// Mostrar/ocultar contraseña en login
-
-// Mostrar/ocultar contraseña en login - CORREGIDO: ojo cerrado cuando password está oculto
-login_ojo.addEventListener("click", function() {
+login_ojo.addEventListener("click", (e) => {
+    e.preventDefault()
     if (login_password.type === "password") {
         login_password.type = "text";
         this.querySelector(".material-symbols-outlined").textContent = "visibility";

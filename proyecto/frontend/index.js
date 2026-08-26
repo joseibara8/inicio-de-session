@@ -17,6 +17,7 @@ const notasGuardadas = localStorage.getItem("notas");
 if (notasGuardadas) {
   ListaDenotas = JSON.parse(notasGuardadas);
 
+
   ListaDenotas.forEach((nota) => {
     crear_nota(nota.texto);
   });
@@ -87,7 +88,7 @@ function crear_nota(texto) {
   contenedor.appendChild(contenedor_listasj);
 }
 
-// Agregar nota nueva
+
 enviar.addEventListener("click", (e) => {
   e.preventDefault();
 
