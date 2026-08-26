@@ -11,7 +11,7 @@ let notaSeleccionada;
 let ListaDenotas = [];
 let indiceSeleccionado;
 
-// Cargar notas guardadas
+
 const notasGuardadas = localStorage.getItem("notas");
 
 if (notasGuardadas) {
@@ -28,7 +28,6 @@ iniciar_session.addEventListener("click", (e) => {
     window.location.assign('/login')
 })
 
-// Crear nota en pantalla
 function crear_nota(texto) {
   const contenedor_listasj = document.createElement("div");
   contenedor_listasj.classList.add("listas");
@@ -108,7 +107,7 @@ enviar.addEventListener("click", (e) => {
   agregar.value = "";
 });
 
-// Guardar edición
+
 guardar.addEventListener("click", () => {
   notaSeleccionada.value = textarea_modal.value;
 
@@ -120,7 +119,7 @@ guardar.addEventListener("click", () => {
   modal.classList.add("oculto");
 });
 
-// Cancelar edición
+
 cancelar.addEventListener("click", () => {
   oculto.classList.add("oculto");
   modal.classList.add("oculto");
