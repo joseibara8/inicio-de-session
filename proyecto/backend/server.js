@@ -276,6 +276,8 @@ app.post("/tareas", (req, res) => {
         titulo,
         description
     ];
+    console.log("hola");
+    
 
     db.query(sql, values, (err, results) => {
 
