@@ -68,11 +68,6 @@ app.get("/codigo", (req, res) => {
     res.sendFile(path.join(__dirname, "../frontend/codigo.html"));
 });
 
-app.post("/",(req,res) => {
-    console.log(hola);
-    
-})
-
 app.post("/login", (req, res) => {
     if (req.body.login_email.trim() === "" || 
         req.body.login_password.trim() === "") {
@@ -263,34 +258,8 @@ app.post("/codigo",(req,res) =>{
         })
     })
 })
-app.post("/tareas", (req, res) => {
 
-    const { title, description } = req.body;
 
-    const sql = `
-        INSERT INTO tareas (user_id, title, description)
-        VALUES (?, ?, ?)
-    `;
-
-    const values = [
-        1,
-        title,
-        description
-    ];
-
-    db.query(sql, values, (err, results) => {
-
-        if (err) {
-            console.error(err);
-            return res.status(500).send("Error al guardar la tarea");
-        }
-
-        res.send("Tarea guardada correctamente");
-
-    });
-
-});
-
-app.listen(4000, () => {
+app.listen(3000, () => {
     console.log("Servidor funcionando en http://localhost:4000");
 });
