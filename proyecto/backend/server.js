@@ -265,16 +265,15 @@ app.post("/codigo",(req,res) =>{
 })
 app.post("/tareas", (req, res) => {
 
-    const { title, description } = req.body;
+    const { titulo, description } = req.body;
 
     const sql = `
-        INSERT INTO tareas (user_id, title, description)
-        VALUES (?, ?, ?)
+        INSERT INTO tarea ( titulo, description)
+        VALUES (?, ?)
     `;
 
     const values = [
-        1,
-        title,
+        titulo,
         description
     ];
 
@@ -291,6 +290,6 @@ app.post("/tareas", (req, res) => {
 
 });
 
-app.listen(4000, () => {
-    console.log("Servidor funcionando en http://localhost:4000");
+app.listen(3000, () => {
+    console.log("Servidor funcionando en http://localhost:3000");
 });

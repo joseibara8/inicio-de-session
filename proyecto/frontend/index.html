@@ -3,63 +3,63 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>To Do List</title>
+  <title>Lista de tareas</title>
   <link rel="stylesheet" href="index.css">
   <script defer src="./index.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
 </head>
 <body>
-  <header class="app-header">
-    <nav class="app-navigation">
-      <h1 class="app-title">To Do List</h1>
+  <header class="encabezado-aplicacion">
+    <nav class="navegacion-aplicacion">
+      <h1 class="titulo-aplicacion">Lista de tareas</h1>
       <a href="/login">
-        <button class="login-button" type="button">Iniciar sesión</button>
+        <button class="boton-iniciar-sesion" type="button">Iniciar sesión</button>
       </a>
     </nav>
   </header>
 
-  <main class="todo-app">
-    <h2 class="todo-form__heading">Agregue su cosa por hacer</h2>
+  <main class="aplicacion-tareas">
+    <h2 class="titulo-formulario-tareas">Agregue su tarea</h2>
 
-    <div class="todo-form">
+    <div class="formulario-tareas">
       <textarea
-        class="todo-form__input"
+        class="entrada-nueva-tarea"
         placeholder="Comprar un paquete de..."
       ></textarea>
-      <button class="todo-form__submit" type="button" aria-label="Agregar nota">
+      <button class="boton-agregar-tarea" type="button" aria-label="Agregar tarea">
         <span class="material-symbols-outlined">arrow_downward</span>
       </button>
     </div>
 
-    <h2 class="todo-list__heading">Sus listas</h2>
-    <div class="todo-list"></div>
+    <h2 class="titulo-lista-tareas">Sus tareas</h2>
+    <div class="lista-tareas"></div>
   </main>
 
-  <div id="modal-overlay" class="is-hidden"></div>
+  <div id="fondo-modal" class="esta-oculto"></div>
 
-  <section id="note-editor-modal" class="is-hidden" aria-label="Editar nota">
-    <h2 class="modal__title">Editar nota</h2>
-    <textarea id="note-editor-input"></textarea>
+  <section id="modal-editar-tarea" class="esta-oculto" aria-label="Editar tarea">
+    <h2 class="titulo-modal">Editar tarea</h2>
+    <textarea id="entrada-editar-tarea"></textarea>
 
-    <div class="modal__actions">
-      <button class="modal__button" id="cancel-note-edit" type="button" aria-label="Cancelar">
+    <div class="acciones-modal">
+      <button class="boton-modal" id="cancelar-edicion-tarea" type="button" aria-label="Cancelar">
         <span class="material-symbols-outlined">close</span>
       </button>
-      <button class="modal__button" id="save-note-edit" type="button" aria-label="Guardar">
+      <button class="boton-modal" id="guardar-edicion-tarea" type="button" aria-label="Guardar">
         <span class="material-symbols-outlined">check</span>
       </button>
     </div>
   </section>
 
-  <section id="note-title-modal" class="is-hidden" aria-label="Escribir título de nota">
-    <h2 class="modal__title">Escribe el título</h2>
-    <textarea id="note-title-input" placeholder="Ir a recoger..."></textarea>
+  <section id="modal-titulo-tarea" class="esta-oculto" aria-label="Escribir título de tarea">
+    <h2 class="titulo-modal">Escribe el título</h2>
+    <textarea id="entrada-titulo-tarea" placeholder="Ir a recoger..."></textarea>
 
-    <div class="modal__actions">
-      <button class="modal__button" id="cancel-note-title" type="button" aria-label="Cancelar">
+    <div class="acciones-modal">
+      <button class="boton-modal" id="cancelar-titulo-tarea" type="button" aria-label="Cancelar">
         <span class="material-symbols-outlined">close</span>
       </button>
-      <button class="modal__button" id="save-note-title" type="button" aria-label="Guardar">
+      <button class="boton-modal" id="guardar-titulo-tarea" type="button" aria-label="Guardar">
         <span class="material-symbols-outlined">check</span>
       </button>
     </div>

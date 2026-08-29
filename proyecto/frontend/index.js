@@ -1,140 +1,142 @@
-const todoList = document.querySelector(".todo-list");
-const modalOverlay = document.querySelector("#modal-overlay");
-const addNoteButton = document.querySelector(".todo-form__submit");
-const newNoteInput = document.querySelector(".todo-form__input");
-const noteEditorModal = document.querySelector("#note-editor-modal");
-const noteTitleModal = document.querySelector("#note-title-modal");
-const noteEditorInput = document.querySelector("#note-editor-input");
-const noteTitleInput = document.querySelector("#note-title-input");
-const saveNoteEditButton = document.querySelector("#save-note-edit");
-const cancelNoteEditButton = document.querySelector("#cancel-note-edit");
-const saveNoteTitleButton = document.querySelector("#save-note-title");
-const cancelNoteTitleButton = document.querySelector("#cancel-note-title");
-const loginButton = document.querySelector(".login-button");
+const listaTareas = document.querySelector(".lista-tareas");
+const fondoModal = document.querySelector("#fondo-modal");
+const botonAgregarTarea = document.querySelector(".boton-agregar-tarea");
+const entradaNuevaTarea = document.querySelector(".entrada-nueva-tarea");
+const modalEditarTarea = document.querySelector("#modal-editar-tarea");
+const modalTituloTarea = document.querySelector("#modal-titulo-tarea");
+const entradaEditarTarea = document.querySelector("#entrada-editar-tarea");
+const entradaTituloTarea = document.querySelector("#entrada-titulo-tarea");
+const botonGuardarEdicion = document.querySelector("#guardar-edicion-tarea");
+const botonCancelarEdicion = document.querySelector("#cancelar-edicion-tarea");
+const botonGuardarTitulo = document.querySelector("#guardar-titulo-tarea");
+const botonCancelarTitulo = document.querySelector("#cancelar-titulo-tarea");
+const botonIniciarSesion = document.querySelector(".boton-iniciar-sesion");
 
-let selectedNote = null;
-const notes = [];
+let tareaSeleccionada = null;
+const tareas = [];
 
-function addNote(event) {
-  event.preventDefault();
+function agregarTarea(evento) {
+  evento.preventDefault();
 
-  const text = newNoteInput.value.trim();
+  const texto = entradaNuevaTarea.value.trim();
 
-  if (!text) {
+  if (!texto) {
     return;
   }
 
-  const note = { text, title: "" };
-  notes.push(note);
-  selectedNote = note;
-  newNoteInput.value = "";
+  const tarea = { texto, titulo: "" };
+  tareas.push(tarea);
+  tareaSeleccionada = tarea;
+  entradaNuevaTarea.value = "";
 
-  modalOverlay.classList.remove("is-hidden");
-  noteTitleModal.classList.remove("is-hidden");
+  fondoModal.classList.remove("esta-oculto");
+  modalTituloTarea.classList.remove("esta-oculto");
 }
 
-function saveNoteTitle() {
-  const title = noteTitleInput.value.trim();
+function guardarTituloTarea() {
+  const titulo = entradaTituloTarea.value.trim();
 
-  if (!title || !selectedNote) {
+  if (!titulo || !tareaSeleccionada) {
     return;
   }
 
-  selectedNote.title = title;
-  createNote(selectedNote);
-  noteTitleInput.value = "";
-  hideNoteTitleModal();
-  
+  const tarea = tareaSeleccionada;
+  tarea.titulo = titulo;
+  crearTarea(tarea);
+  entradaTituloTarea.value = "";
+  ocultarModalTitulo();
 
   fetch("/tareas", {
     method: "POST",
     headers: {
-        "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
-        title: selectedNote.title,
-        description: selectedNote.text
-    })
-});
+      titulo: tarea.titulo,
+      description: tarea.texto
+    }),
+  }).catch((error) => {
+    console.error("No se pudo guardar la tarea:", error);
+  });
 }
 
-function createNote(note) {
-  const noteElement = document.createElement("div");
-  noteElement.classList.add("todo-item");
+function crearTarea(tarea) {
+  const elementoTarea = document.createElement("div");
+  elementoTarea.classList.add("tarea");
 
-  const noteTitle = document.createElement("h3");
-  noteTitle.classList.add("todo-item__title");
-  noteTitle.textContent = note.title;
+  const tituloTarea = document.createElement("h3");
+  tituloTarea.classList.add("tarea__titulo");
+  tituloTarea.textContent = tarea.titulo;
 
-  const noteContent = document.createElement("textarea");
-  noteContent.classList.add("todo-item__content");
-  noteContent.value = note.text;
-  noteContent.addEventListener("click", () => showNoteEditor(note));
+  const contenidoTarea = document.createElement("textarea");
+  contenidoTarea.classList.add("tarea__contenido");
+  contenidoTarea.value = tarea.texto;
+  contenidoTarea.addEventListener("click", () => mostrarModalEdicion(tarea));
 
-  const completeButton = document.createElement("button");
-  completeButton.type = "button";
-  completeButton.classList.add("todo-item__complete-button");
-  completeButton.innerHTML = '<span class="material-symbols-outlined">check_box</span>';
+  const botonCompletar = document.createElement("button");
+  botonCompletar.type = "button";
+  botonCompletar.classList.add("tarea__boton-completar");
+  botonCompletar.innerHTML = '<span class="material-symbols-outlined">check_box</span>';
 
-  const deleteButton = document.createElement("button");
-  deleteButton.type = "button";
-  deleteButton.classList.add("todo-item__delete-button");
-  deleteButton.innerHTML = '<span class="material-symbols-outlined">delete</span>';
-  deleteButton.addEventListener("click", () => deleteNote(note, noteElement));
+  const botonEliminar = document.createElement("button");
+  botonEliminar.type = "button";
+  botonEliminar.classList.add("tarea__boton-eliminar");
+  botonEliminar.innerHTML = '<span class="material-symbols-outlined">delete</span>';
+  botonEliminar.addEventListener("click", () => eliminarTarea(tarea, elementoTarea));
 
-  noteElement.append(noteTitle, completeButton, noteContent, deleteButton);
-  todoList.appendChild(noteElement);
+  elementoTarea.append(tituloTarea, botonCompletar, contenidoTarea, botonEliminar);
+  listaTareas.appendChild(elementoTarea);
 
-  note.contentElement = noteContent;
+  tarea.elementoContenido = contenidoTarea;
 }
 
-function showNoteEditor(note) {
-  selectedNote = note;
-  noteEditorInput.value = note.text;
-  modalOverlay.classList.remove("is-hidden");
-  noteEditorModal.classList.remove("is-hidden");
+function mostrarModalEdicion(tarea) {
+  tareaSeleccionada = tarea;
+  entradaEditarTarea.value = tarea.texto;
+  fondoModal.classList.remove("esta-oculto");
+  modalEditarTarea.classList.remove("esta-oculto");
 }
 
-function saveNoteEdit() {
-  if (!selectedNote) {
+function guardarEdicionTarea() {
+  if (!tareaSeleccionada) {
     return;
   }
 
-  selectedNote.text = noteEditorInput.value;
-  selectedNote.contentElement.value = noteEditorInput.value;
-  hideNoteEditor();
+  tareaSeleccionada.texto = entradaEditarTarea.value;
+  tareaSeleccionada.elementoContenido.value = entradaEditarTarea.value;
+  ocultarModalEdicion();
 }
 
-function deleteNote(note, noteElement) {
-  const noteIndex = notes.indexOf(note);
+function eliminarTarea(tarea, elementoTarea) {
+  const indice = tareas.indexOf(tarea);
 
-  if (noteIndex !== -1) {
-    notes.splice(noteIndex, 1);
+  if (indice !== -1) {
+    tareas.splice(indice, 1);
   }
 
-  noteElement.remove();
+  elementoTarea.remove();
 }
 
-function hideNoteEditor() {
-  modalOverlay.classList.add("is-hidden");
-  noteEditorModal.classList.add("is-hidden");
-  selectedNote = null;
+function ocultarModalEdicion() {
+  fondoModal.classList.add("esta-oculto");
+  modalEditarTarea.classList.add("esta-oculto");
+  tareaSeleccionada = null;
 }
 
-function hideNoteTitleModal() {
-  modalOverlay.classList.add("is-hidden");
-  noteTitleModal.classList.add("is-hidden");
-  selectedNote = null;
+function ocultarModalTitulo() {
+  fondoModal.classList.add("esta-oculto");
+  modalTituloTarea.classList.add("esta-oculto");
+  tareaSeleccionada = null;
 }
 
-function goToLogin(event) {
-  event.preventDefault();
+function irAIniciarSesion(evento) {
+  evento.preventDefault();
   window.location.assign("/login");
 }
 
-addNoteButton.addEventListener("click", addNote);
-saveNoteTitleButton.addEventListener("click", saveNoteTitle);
-saveNoteEditButton.addEventListener("click", saveNoteEdit);
-cancelNoteEditButton.addEventListener("click", hideNoteEditor);
-cancelNoteTitleButton.addEventListener("click", hideNoteTitleModal);
-loginButton.addEventListener("click", goToLogin);
+botonAgregarTarea.addEventListener("click", agregarTarea);
+botonGuardarTitulo.addEventListener("click", guardarTituloTarea);
+botonGuardarEdicion.addEventListener("click", guardarEdicionTarea);
+botonCancelarEdicion.addEventListener("click", ocultarModalEdicion);
+botonCancelarTitulo.addEventListener("click", ocultarModalTitulo);
+botonIniciarSesion.addEventListener("click", irAIniciarSesion);
