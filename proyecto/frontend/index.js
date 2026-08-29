@@ -1,126 +1,140 @@
-const contenedor = document.querySelector(".contenedor__de_listas");
-const oculto = document.querySelector("#fondo");
-const enviar = document.querySelector(".enviar");
-const agregar = document.querySelector(".agregar");
-const modal = document.querySelector("#modal");
-const textarea_modal = document.querySelector("#textarea-modal");
-const guardar = document.querySelector("#guardar");
-const cancelar = document.querySelector("#cancelar");
-const iniciar_session = document.querySelector(".button-iniciar-session")
-let notaSeleccionada;
-let ListaDenotas = [];
-let indiceSeleccionado;
+const todoList = document.querySelector(".todo-list");
+const modalOverlay = document.querySelector("#modal-overlay");
+const addNoteButton = document.querySelector(".todo-form__submit");
+const newNoteInput = document.querySelector(".todo-form__input");
+const noteEditorModal = document.querySelector("#note-editor-modal");
+const noteTitleModal = document.querySelector("#note-title-modal");
+const noteEditorInput = document.querySelector("#note-editor-input");
+const noteTitleInput = document.querySelector("#note-title-input");
+const saveNoteEditButton = document.querySelector("#save-note-edit");
+const cancelNoteEditButton = document.querySelector("#cancel-note-edit");
+const saveNoteTitleButton = document.querySelector("#save-note-title");
+const cancelNoteTitleButton = document.querySelector("#cancel-note-title");
+const loginButton = document.querySelector(".login-button");
 
+let selectedNote = null;
+const notes = [];
 
-const notasGuardadas = localStorage.getItem("notas");
+function addNote(event) {
+  event.preventDefault();
 
-if (notasGuardadas) {
-  ListaDenotas = JSON.parse(notasGuardadas);
+  const text = newNoteInput.value.trim();
 
-
-  ListaDenotas.forEach((nota) => {
-    crear_nota(nota.texto);
-  });
-}
-
-iniciar_session.addEventListener("click", (e) => {
-    e.preventDefault()
-    window.location.assign('/login')
-})
-
-function crear_nota(texto) {
-  const contenedor_listasj = document.createElement("div");
-  contenedor_listasj.classList.add("listas");
-
-  const nueva_lista = document.createElement("textarea");
-  nueva_lista.classList.add("agregarT");
-  nueva_lista.value = texto;
-
-  nueva_lista.addEventListener("click", () => {
-    notaSeleccionada = nueva_lista;
-
-    indiceSeleccionado = ListaDenotas.findIndex(
-      (nota) => nota.texto === nueva_lista.value,
-    );
-
-    oculto.classList.remove("oculto");
-    textarea_modal.value = nueva_lista.value;
-    modal.classList.remove("oculto");
-  });
-
-  const eliminar = document.createElement("button");
-  eliminar.type = "button";
-  eliminar.classList.add("eliminar");
-
-  const icono = document.createElement("span");
-  icono.classList.add("material-symbols-outlined");
-  icono.textContent = "delete";
-
-  eliminar.appendChild(icono);
-
-  eliminar.addEventListener("click", () => {
-    const indice = ListaDenotas.findIndex(
-      (nota) => nota.texto === nueva_lista.value,
-    );
-
-    ListaDenotas.splice(indice, 1);
-
-    localStorage.setItem("notas", JSON.stringify(ListaDenotas));
-
-    contenedor_listasj.remove();
-  });
-
-  const check = document.createElement("button");
-  check.type = "button";
-  check.classList.add("check");
-
-  const icono_check = document.createElement("span");
-  icono_check.classList.add("material-symbols-outlined");
-  icono_check.textContent = "check_box";
-
-  check.appendChild(icono_check);
-
-  contenedor_listasj.appendChild(check);
-  contenedor_listasj.appendChild(nueva_lista);
-  contenedor_listasj.appendChild(eliminar);
-
-  contenedor.appendChild(contenedor_listasj);
-}
-
-
-enviar.addEventListener("click", (e) => {
-  e.preventDefault();
-
-  if (agregar.value === "") {
-    console.log("error");
+  if (!text) {
     return;
   }
 
-  ListaDenotas.push({
-    texto: agregar.value,
-  });
+  const note = { text, title: "" };
+  notes.push(note);
+  selectedNote = note;
+  newNoteInput.value = "";
 
-  localStorage.setItem("notas", JSON.stringify(ListaDenotas));
+  modalOverlay.classList.remove("is-hidden");
+  noteTitleModal.classList.remove("is-hidden");
+}
 
-  crear_nota(agregar.value);
+function saveNoteTitle() {
+  const title = noteTitleInput.value.trim();
 
-  agregar.value = "";
+  if (!title || !selectedNote) {
+    return;
+  }
+
+  selectedNote.title = title;
+  createNote(selectedNote);
+  noteTitleInput.value = "";
+  hideNoteTitleModal();
+  
+
+  fetch("/tareas", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        title: selectedNote.title,
+        description: selectedNote.text
+    })
 });
+}
 
+function createNote(note) {
+  const noteElement = document.createElement("div");
+  noteElement.classList.add("todo-item");
 
-guardar.addEventListener("click", () => {
-  notaSeleccionada.value = textarea_modal.value;
+  const noteTitle = document.createElement("h3");
+  noteTitle.classList.add("todo-item__title");
+  noteTitle.textContent = note.title;
 
-  ListaDenotas[indiceSeleccionado].texto = textarea_modal.value;
+  const noteContent = document.createElement("textarea");
+  noteContent.classList.add("todo-item__content");
+  noteContent.value = note.text;
+  noteContent.addEventListener("click", () => showNoteEditor(note));
 
-  localStorage.setItem("notas", JSON.stringify(ListaDenotas));
+  const completeButton = document.createElement("button");
+  completeButton.type = "button";
+  completeButton.classList.add("todo-item__complete-button");
+  completeButton.innerHTML = '<span class="material-symbols-outlined">check_box</span>';
 
-  oculto.classList.add("oculto");
-  modal.classList.add("oculto");
-});
+  const deleteButton = document.createElement("button");
+  deleteButton.type = "button";
+  deleteButton.classList.add("todo-item__delete-button");
+  deleteButton.innerHTML = '<span class="material-symbols-outlined">delete</span>';
+  deleteButton.addEventListener("click", () => deleteNote(note, noteElement));
 
+  noteElement.append(noteTitle, completeButton, noteContent, deleteButton);
+  todoList.appendChild(noteElement);
 
-cancelar.addEventListener("click", () => {
-  oculto.classList.add("oculto");
-  modal.classList.add("oculto");
-});
+  note.contentElement = noteContent;
+}
+
+function showNoteEditor(note) {
+  selectedNote = note;
+  noteEditorInput.value = note.text;
+  modalOverlay.classList.remove("is-hidden");
+  noteEditorModal.classList.remove("is-hidden");
+}
+
+function saveNoteEdit() {
+  if (!selectedNote) {
+    return;
+  }
+
+  selectedNote.text = noteEditorInput.value;
+  selectedNote.contentElement.value = noteEditorInput.value;
+  hideNoteEditor();
+}
+
+function deleteNote(note, noteElement) {
+  const noteIndex = notes.indexOf(note);
+
+  if (noteIndex !== -1) {
+    notes.splice(noteIndex, 1);
+  }
+
+  noteElement.remove();
+}
+
+function hideNoteEditor() {
+  modalOverlay.classList.add("is-hidden");
+  noteEditorModal.classList.add("is-hidden");
+  selectedNote = null;
+}
+
+function hideNoteTitleModal() {
+  modalOverlay.classList.add("is-hidden");
+  noteTitleModal.classList.add("is-hidden");
+  selectedNote = null;
+}
+
+function goToLogin(event) {
+  event.preventDefault();
+  window.location.assign("/login");
+}
+
+addNoteButton.addEventListener("click", addNote);
+saveNoteTitleButton.addEventListener("click", saveNoteTitle);
+saveNoteEditButton.addEventListener("click", saveNoteEdit);
+cancelNoteEditButton.addEventListener("click", hideNoteEditor);
+cancelNoteTitleButton.addEventListener("click", hideNoteTitleModal);
+loginButton.addEventListener("click", goToLogin);

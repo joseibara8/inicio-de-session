@@ -263,6 +263,33 @@ app.post("/codigo",(req,res) =>{
         })
     })
 })
+app.post("/tareas", (req, res) => {
+
+    const { title, description } = req.body;
+
+    const sql = `
+        INSERT INTO tareas (user_id, title, description)
+        VALUES (?, ?, ?)
+    `;
+
+    const values = [
+        1,
+        title,
+        description
+    ];
+
+    db.query(sql, values, (err, results) => {
+
+        if (err) {
+            console.error(err);
+            return res.status(500).send("Error al guardar la tarea");
+        }
+
+        res.send("Tarea guardada correctamente");
+
+    });
+
+});
 
 app.listen(4000, () => {
     console.log("Servidor funcionando en http://localhost:4000");

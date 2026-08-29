@@ -1,63 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Memes</title>
+  <title>To Do List</title>
   <link rel="stylesheet" href="index.css">
   <script defer src="./index.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
 </head>
 <body>
-    <div class="header">
-    <nav class="nav">
-        
-            <h1 class="titulo">To do List</h1>
-            <a href="/login"><button class="button-iniciar-session" href="/login">iniciar session</button></a>
+  <header class="app-header">
+    <nav class="app-navigation">
+      <h1 class="app-title">To Do List</h1>
+      <a href="/login">
+        <button class="login-button" type="button">Iniciar sesión</button>
+      </a>
+    </nav>
+  </header>
+
+  <main class="todo-app">
+    <h2 class="todo-form__heading">Agregue su cosa por hacer</h2>
+
+    <div class="todo-form">
+      <textarea
+        class="todo-form__input"
+        placeholder="Comprar un paquete de..."
+      ></textarea>
+      <button class="todo-form__submit" type="button" aria-label="Agregar nota">
+        <span class="material-symbols-outlined">arrow_downward</span>
+      </button>
     </div>
-    <main>
-        <div class="contenedor">
 
-                <h2 class="titulo_lista">Agregue su cosa por hacer</h2>
-            <div class="lista">
-                <textarea class="agregar" 
-                placeholder="comprar un paquete de..."></textarea>
-                <button class="enviar" type="submit">
-                    <span           class="material-symbols-outlined">
-                        arrow_downward
-                    </span>
-                </button>
+    <h2 class="todo-list__heading">Sus listas</h2>
+    <div class="todo-list"></div>
+  </main>
 
-            </div>
-            <h2 class="titulo_listas"> Sus Listas</h2>
-            <div class="contenedor__de_listas">
+  <div id="modal-overlay" class="is-hidden"></div>
 
-                    
-            </div>
-            
-        </div>
-        <div id="fondo" class="oculto"></div>
-        <div  id="modal" class="oculto">
-            <h2 class="titulo-modal">Editar Nota</h2>
+  <section id="note-editor-modal" class="is-hidden" aria-label="Editar nota">
+    <h2 class="modal__title">Editar nota</h2>
+    <textarea id="note-editor-input"></textarea>
 
-            <textarea  id="textarea-modal"></textarea>
-            
-            <div class="botones-modal">
-
-            <button class="boton-modal" id="cancelar" type="submit">
-                    <span           class="material-symbols-outlined">
-                        close
-                    </span>
-            </button>
-                <button class="boton-modal" id="guardar" type="submit">
-                    <span           class="material-symbols-outlined">
-                        check
-                    </span>
-                </button>
-            </div>
-        
+    <div class="modal__actions">
+      <button class="modal__button" id="cancel-note-edit" type="button" aria-label="Cancelar">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+      <button class="modal__button" id="save-note-edit" type="button" aria-label="Guardar">
+        <span class="material-symbols-outlined">check</span>
+      </button>
     </div>
-    </main>
+  </section>
+
+  <section id="note-title-modal" class="is-hidden" aria-label="Escribir título de nota">
+    <h2 class="modal__title">Escribe el título</h2>
+    <textarea id="note-title-input" placeholder="Ir a recoger..."></textarea>
+
+    <div class="modal__actions">
+      <button class="modal__button" id="cancel-note-title" type="button" aria-label="Cancelar">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+      <button class="modal__button" id="save-note-title" type="button" aria-label="Guardar">
+        <span class="material-symbols-outlined">check</span>
+      </button>
+    </div>
+  </section>
 </body>
 </html>
-
