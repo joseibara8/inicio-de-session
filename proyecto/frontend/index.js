@@ -127,9 +127,24 @@ function guardarEdicionTarea() {
     return;
   }
 
-  tareaSeleccionada.texto = entradaEditarTarea.value;
-  tareaSeleccionada.elementoContenido.value = entradaEditarTarea.value;
-  ocultarModalEdicion();
+  const tarea = tareaSeleccionada
+  tarea.texto = entradaEditarTarea.value
+  tarea.elementoContenido.value = tarea.texto;
+
+
+  fetch("/actualizar", {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+      body: JSON.stringify({
+      texto: tarea.texto,
+      id: tarea.id
+    }),
+  }).catch((error) => {
+    console.error("No se pudo actualizar la tarea:", error);
+  });
+    ocultarModalEdicion()
 }
 
 function eliminarTarea(tarea, elementoTarea) {
@@ -148,7 +163,8 @@ function eliminarTarea(tarea, elementoTarea) {
     },
     body: JSON.stringify({
       titulo: tarea.titulo,
-      texto: tarea.texto
+      texto: tarea.texto,
+      id: tarea.id
     }),
   }).catch((error) => {
     console.error("No se pudo borrar la tarea:", error);

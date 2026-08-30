@@ -32,6 +32,8 @@ db.connect((err) => {
     console.log("Conectado a MySQL");
 });
 
+
+
 setInterval(() => {
     const sql = "DELETE FROM pending_users WHERE expires_at < NOW()";
 
@@ -80,6 +82,43 @@ app.get("/tareas", (req, res) => {
         res.json(results);
     });
 });
+
+app.delete("/eliminar", (req, res) => {
+    console.log("DELETE recibido");
+    console.log(req.body.id);
+    
+    const sql = "DELETE FROM tarea WHERE id = ?"
+    db.query(sql,req.body.id,(err,results) =>{
+        if (err) {
+            console.log(err);
+            return res.status(500).send("error en la base de datos");
+
+        }
+        
+        console.log("exito");
+        
+        return res.send("tarea borrada")
+    })
+});
+
+
+app.patch("/actualizar",(req,res) =>{
+
+    
+    const sql = `UPDATE tarea
+                SET texto = ?
+                WHERE id = ?`
+
+    db.query(sql,[req.body.texto,req.body.id],(err,results) =>{
+        if (err) {
+            console.log(err);
+            return res.status(500).send("error en la base de datos");
+            
+        }
+        console.log("extito");
+        
+    })
+})
 
 app.post("/login", (req, res) => {
     if (req.body.login_email.trim() === "" || 
