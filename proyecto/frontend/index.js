@@ -53,7 +53,7 @@ function guardarTituloTarea() {
     },
     body: JSON.stringify({
       titulo: tarea.titulo,
-      description: tarea.texto
+      texto: tarea.texto
     }),
   }).catch((error) => {
     console.error("No se pudo guardar la tarea:", error);
@@ -65,7 +65,7 @@ function crearTarea(tarea) {
   elementoTarea.classList.add("tarea");
 
   const tituloTarea = document.createElement("h3");
-  tituloTarea.classList.add("tarea__titulo");
+  tituloTarea.classList.add("tarea__titulo");      
   tituloTarea.textContent = tarea.titulo;
 
   const contenidoTarea = document.createElement("textarea");
@@ -88,6 +88,31 @@ function crearTarea(tarea) {
   listaTareas.appendChild(elementoTarea);
 
   tarea.elementoContenido = contenidoTarea;
+}
+async function cargarTareas() {
+    try {
+        const respuesta = await fetch("/tareas");
+
+        if (!respuesta.ok) {
+            throw new Error("No se pudieron obtener las tareas");
+        }
+
+        const tareasGuardadas = await respuesta.json();
+
+        tareasGuardadas.forEach((tareaBD) => {
+            const tarea = {
+                id: tareaBD.id,
+                texto: tareaBD.texto,
+                titulo: tareaBD.titulo
+            };
+
+            tareas.push(tarea);
+            crearTarea(tarea);
+        });
+
+    } catch (error) {
+        console.error("Error al cargar las tareas:", error);
+    }
 }
 
 function mostrarModalEdicion(tarea) {
@@ -115,6 +140,19 @@ function eliminarTarea(tarea, elementoTarea) {
   }
 
   elementoTarea.remove();
+
+  fetch("/eliminar", {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      titulo: tarea.titulo,
+      texto: tarea.texto
+    }),
+  }).catch((error) => {
+    console.error("No se pudo borrar la tarea:", error);
+  });
 }
 
 function ocultarModalEdicion() {
@@ -140,3 +178,4 @@ botonGuardarEdicion.addEventListener("click", guardarEdicionTarea);
 botonCancelarEdicion.addEventListener("click", ocultarModalEdicion);
 botonCancelarTitulo.addEventListener("click", ocultarModalTitulo);
 botonIniciarSesion.addEventListener("click", irAIniciarSesion);
+cargarTareas();

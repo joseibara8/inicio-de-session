@@ -68,10 +68,18 @@ app.get("/codigo", (req, res) => {
     res.sendFile(path.join(__dirname, "../frontend/codigo.html"));
 });
 
-app.post("/",(req,res) => {
-    console.log(hola);
-    
-})
+app.get("/tareas", (req, res) => {
+    const sql = "SELECT * FROM tarea";
+
+    db.query(sql, (err, results) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send("Error al obtener las tareas");
+        }
+
+        res.json(results);
+    });
+});
 
 app.post("/login", (req, res) => {
     if (req.body.login_email.trim() === "" || 
@@ -265,16 +273,16 @@ app.post("/codigo",(req,res) =>{
 })
 app.post("/tareas", (req, res) => {
 
-    const { titulo, description } = req.body;
+    const { titulo, texto } = req.body;
 
     const sql = `
-        INSERT INTO tarea ( titulo, description)
+        INSERT INTO tarea ( titulo, texto)
         VALUES (?, ?)
     `;
 
     const values = [
         titulo,
-        description
+        texto
     ];
     console.log("hola");
     
