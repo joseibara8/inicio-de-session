@@ -187,7 +187,7 @@ function irAIniciarSesion(evento) {
   evento.preventDefault();
   window.location.assign("/login");
 }
-/*gatillos*/
+/*gatil s*/
 botonAgregarTarea.addEventListener("click", agregarTarea);
 botonGuardarTitulo.addEventListener("click", guardarTituloTarea);
 botonGuardarEdicion.addEventListener("click", guardarEdicionTarea);
