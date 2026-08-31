@@ -39,11 +39,11 @@ login_button.addEventListener("click", (e) => {
     .then(response => response.text())
     .then(data => {
         if(data === "El correo no existe"){
-            login_email_error.textContent = data
+            login_email_error.textContent = "El correo no existe"
         }else if (data === "La Contraseña es Incorrecta"){
-            login_contraseña_error.textContent = data
+            login_contraseña_error.textContent = "La Contraseña es Incorrecta"
         }else
-        login_button_error.textContent = data
+        window.location.assign("/")
     })
     .catch(error => {
         console.error(error);

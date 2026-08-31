@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt");
 const { log } = require("console");
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const nodemailer = require("nodemailer");
+const session = require("express-session");
 
 
 
@@ -52,6 +53,11 @@ setInterval(() => {
 const app = express();
 
 app.use(express.json());
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false
+}));
 app.use(express.static(path.join(__dirname, "../frontend")));
 
 
@@ -71,14 +77,16 @@ app.get("/codigo", (req, res) => {
 });
 
 app.get("/tareas", (req, res) => {
-    const sql = "SELECT * FROM tarea";
-
-    db.query(sql, (err, results) => {
+    const sql = "SELECT * FROM tarea WHERE user_id = ?";
+    const user_id = req.session.userId
+    console.log("user recibido: " + user_id);
+    
+    db.query(sql,[user_id], (err, results) => {
         if (err) {
             console.error(err);
             return res.status(500).send("Error al obtener las tareas");
         }
-
+        console.log("Tareas encontradas:", results);
         res.json(results);
     });
 });
@@ -121,8 +129,8 @@ app.patch("/actualizar",(req,res) =>{
 })
 
 app.post("/login", (req, res) => {
-    if (req.body.login_email.trim() === "" || 
-        req.body.login_password.trim() === "") {
+    if (req.body.email.trim() === "" || 
+        req.body.password.trim() === "") {
         return res.status(400).send("Campos vacíos");
     }
     const sql = "SELECT * FROM users WHERE email = ?";
@@ -147,6 +155,10 @@ app.post("/login", (req, res) => {
 
         console.log(passwordCorrecta);
         if (passwordCorrecta) {
+            req.session.userId = user.id;
+
+            console.log("Usuario conectado:", req.session.userId);
+
             return res.send("exito");
         }
 
@@ -314,17 +326,18 @@ app.post("/tareas", (req, res) => {
 
     const { titulo, texto } = req.body;
 
+    const userId = req.session.userId;
+
     const sql = `
-        INSERT INTO tarea ( titulo, texto)
-        VALUES (?, ?)
+        INSERT INTO tarea ( titulo, texto,user_id)
+        VALUES (?, ?, ?)
     `;
 
     const values = [
         titulo,
-        texto
+        texto,
+        userId
     ];
-    console.log("hola");
-    
 
     db.query(sql, values, (err, results) => {
 
