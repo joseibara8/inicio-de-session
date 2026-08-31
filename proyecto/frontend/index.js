@@ -187,7 +187,8 @@ function irAIniciarSesion(evento) {
   evento.preventDefault();
   window.location.assign("/login");
 }
-/*gatil s*/
+/*gatil s*/console.log("hola");
+
 botonAgregarTarea.addEventListener("click", agregarTarea);
 botonGuardarTitulo.addEventListener("click", guardarTituloTarea);
 botonGuardarEdicion.addEventListener("click", guardarEdicionTarea);
