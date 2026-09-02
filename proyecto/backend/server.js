@@ -86,7 +86,7 @@ app.get("/tareas", (req, res) => {
             console.error(err);
             return res.status(500).send("Error al obtener las tareas");
         }
-        console.log("Tareas encontradas:", results);
+        
         res.json(results);
     });
 });
