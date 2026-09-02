@@ -79,7 +79,7 @@ app.get("/codigo", (req, res) => {
 app.get("/tareas", (req, res) => {
     const sql = "SELECT * FROM tarea WHERE user_id = ?";
     const user_id = req.session.userId
-    console.log("user recibido: " + user_id);
+    
     
     db.query(sql,[user_id], (err, results) => {
         if (err) {

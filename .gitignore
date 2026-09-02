@@ -1,7 +1,7 @@
 # Environment variables - do not commit real credentials
 .env
 .env.example
-
+exportarBD.js
 # Node modules
 node_modules/
 
